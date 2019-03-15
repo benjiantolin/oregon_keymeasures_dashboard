@@ -1,7 +1,7 @@
 # Oregon by the Counties
 
 
-[Click here for story map](https://benjiantolin.github.io/obtcstorymap/index.html)
+[Click here for story map](https://benjiantolin.github.io/oregon_keymeasures_dashboard/index.html)
 
 ### Introduction
 This is a story map that contains a sample of key measures borrowed from the [Oregon by the Numbers 2018 Edition](https://www.tfff.org/select-books/book/oregon-numbers) report.
