@@ -1,94 +1,245 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Oregon Key Measures Dashboard 2018</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
+    <meta charset="utf-8">
+    <title>ObtC</title>
+    <!--add required stylesheet-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Cairo" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700" rel="stylesheet">
     <style>
-        html, body, #map { width: 100%; height: 100%; margin: 0; background: #fff; }
+
+        body {
+            height: 100%;
+            padding: 20px;
+            margin: 20px;
+            color: black;
+            font-family: 'Cairo', cursive;
+        }
+
+        h2 {
+          font-family: 'Amatic SC', cursive;
+          color: black;
+          font-size: 50px;
+        }
+
+        h3 {
+          font-family: 'Amatic SC', cursive;
+          color: black;
+          font-size: 35px;
+        }
+
+        h4 {
+          font-family: 'Cairo';
+          color: black;
+          font-size: 35px;
+        }
+
+        h6 {
+          font-family: 'Amatic SC', cursive;
+          color: black;
+          font-size: 25px;
+        }
+
+        .map {
+            padding: 10px;
+
+        }
+
+        .image {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: auto;
+            opacity: 0.6;
+            background-color: white;
+            transition: .5s ease;
+        }
+
+        .overlay:hover {
+            opacity: 0.3;
+        }
+
+        .text {
+            color: orange;
+            font-size: 16px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+        }
     </style>
-    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/1.3.4/chroma.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+    <!--add favicon for the web page-->
+    <link rel="shortcut icon" href="img/oregon.ico" type="image/x-icon">
+    <!--add required javascript-->
+    <!-- Bootstrap core JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js"></script>
+
 </head>
+
 <body>
-<!-- Our web map and content will go here -->
-<div id="map"></div>
-<script>
 
-    // 1. Create a map object.
-    var mymap = L.map('map', {
-        center: [44.13, -120.93],
-        zoom: 8,
-        maxZoom: 10,
-        minZoom: 3,
-        detectRetina: true});
+<!-- Page Content -->
+<div class="container">
+    <!-- Page Header -->
+    <!--justify-content-center to center columns (col-*) inside row-->
+    <div class="row justify-content-center align-items-center">
+      <span style="font-size: 3rem;">
+        <a href="#"><i class="fas fa-tree"></i></a>
+    </span>
+    </div>
 
-    // 2. Add a base map.
-    L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png').addTo(mymap);
+    <div class="row text-center">
+        <div class="col-12">
+            <h2>Oregon by the Counties</h2>
+            <hr>
+            <h6>A sample of community measures for Oregon and its counties</h6>
+        </div>
+    </div>
 
-    // 3. Add oregon counties GeoJSON Data
-    // Null variable that will hold oregon key mesaures data by county
-    var counties = null;
+    <hr>
+    <!--mx-auto for centering inside flex elements-->
+    <div class="row mx-auto text-center">
 
-    // Get GeoJSON and put on it on the map when it loads
-  counties= L.geoJson.ajax("assets/oregon_counties_mingeo.json", {
-        // assign a function to the onEachFeature parameter of the cellTowers object.
-        // Then each (point) feature will bind a popup window.
-        // The content of the popup window is the value of `feature.properties.company`
-        onEachFeature: function (feature, layer) {
-            layer.bindPopup('Top 3 Employing Industries'+'<br>1. '+feature.properties.Top_Employ+'<br>2. '+feature.properties.Top_Empl_1+'<br>3. '+feature.properties.Top_Empl_2);
-        },
-        attribution: 'Oregon by the Numbers | Oregon counties &copy; Oregon Explorer | Base Map &copy; CartoDB | Made By Benjamin Antolin'
-    }).addTo(mymap);
-    var county = null;
+        <div class="col-md-4 col-lg-4 map">
+          <span style="font-size: 8rem;">
+            <span style="color: Mediumslateblue;">
+              <i class="fas fa-users"></i>
+            </span>
+          </span>
+            <div class="overlay">
+                <div class="text"><h4><a href="demographic.html">Demographic</a></h4>
+                </div>
+            </div>
+        </div>
 
-    // 3.2 interactive features.
-    // 3.2.1 highlight a feature when the mouse hovers on it.
-    function highlightFeature(e) {
-        // e indicates the current event
-        var layer = e.target; //the target capture the object which the event associates with
-        layer.setStyle({
-            weight: 8,
-            opacity: 0.8,
-            color: '#e3e3e3',
-            fillColor: '#e3e00f',
-            fillOpacity: 0.5
-        });
-        // bring the layer to the front.
-        layer.bringToFront();
-        // select the update class, and update the contet with the input value.
-        $(".update").html('<b>' + layer.feature.properties.COUNTY);
-    }
+        <div class="col-md-4 col-lg-4 map">
+          <span style="font-size: 8rem;">
+            <span style="color: Mediumslateblue;">
+              <i class="fas fa-shopping-basket"></i>
+            </span>
+          </span>
+            <div class="overlay">
+                <div class="text"><h4><a href="social.html">Social</a></h4>
+                </div>
+            </div>
+        </div>
 
-    // 3.2.2 zoom to the highlighted feature when the mouse is clicking onto it.
-    function zoomToFeature(e) {
-        mymap.fitBounds(e.target.getBounds());
-    }
+        <div class="col-md-4 col-lg-4 map">
+          <span style="font-size: 8rem;">
+            <span style="color: Mediumslateblue;">
+              <i class="fas fa-chart-line"></i>
+            </span>
+          </span>
+            <div class="overlay">
+                <div class="text"><h4><a href="economic.html">Economic</a></h4>
+                </div>
+            </div>
+        </div>
 
-    // 3.2.3 reset the hightlighted feature when the mouse is out of its region.
-    function resetHighlight(e) {
-        counties.resetStyle(e.target);
-        $(".update").html("Hover over a county");
-    }
+    </div>
 
-    // 3.3 add these event the layer obejct.
-    function onEachFeature(feature, layer) {
-        layer.on({
-            mouseover: highlightFeature,
-            click: zoomToFeature,
-            mouseout: resetHighlight
-        });
-    }
+    <div class="row mx-auto text-center">
 
-    // 3.4 assign the geojson data path, style option and onEachFeature option. And then Add the geojson layer to the map.
-    county = L.geoJson.ajax('assets/oregon_counties_mingeo.json', {
-        style: style,
-        onEachFeature: onEachFeature
-    }).addTo(mymap);
+        <div class="col-md-4 col-lg-4 map">
+          <span style="font-size: 8rem;">
+            <span style="color: Mediumslateblue;">
+              <i class="fas fa-user-graduate"></i>
+            </span>
+          </span>
+            <div class="overlay">
+                <div class="text"><h4><a href="education.html">Education</a></h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-4 map">
+          <span style="font-size: 8rem;">
+            <span style="color: Mediumslateblue;">
+              <i class="fas fa-medkit"></i>
+            </span>
+          </span>
+            <div class="overlay">
+                <div class="text"><h4><a href="health.html">Health</a></h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-4 map">
+          <span style="font-size: 8rem;">
+            <span style="color: Mediumslateblue;">
+              <i class="fas fa-road"></i>
+            </span>
+          </span>
+            <div class="overlay">
+                <div class="text"><h4><a href="infrastructure.html">Infrastructure</a></h4>
+                </div>
+            </div>
+        </div>
 
-</script>
+    </div>
+
+    <hr>
+
+    <footer class="container">
+
+        <div class="row justify-content-center align-items-center">
+            <p> Benjamin Antolin, Oregon State University, 2019 </p>
+        </div>
+
+        <div class="row justify-content-center align-items-center">
+          <a class="fab fa-facebook-square btn"
+             href="https://facebook.com/sharer.php?u=http://benjiantolin.github.io/obtcstorymap/index.html"
+             target="_blank"></a>
+          <a class="fab fa-github btn" href="https://github.com/benjiantolin/obtcstorymap" style="top:40px"
+                target="_blank"></a>
+          <i class="fas fa-info-circle btn" style="top:60px" data-toggle="modal" data-target="#info-modal"></i>
+          <!--the info page-->
+          <div class="modal fade" id="info-modal" role="dialog">
+              <div class="modal-dialog modal-md">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          <h4 class="modal-title">About</h4>
+                      </div>
+                      <div class="modal-body">
+                        <p>This is a story map that contains a sample of key measures borrowed from the <a href="https://www.tfff.org/select-books/book/oregon-numbers">Oregon by the Numbers 2018 Edition</a> report.
+                          <br><br>
+                          A handful of the key measures provided in the report are further visualize the data using a
+                          dynamic online interface. The goal of report is to get information to local community leaders, to
+                          encorage data driven decision making.
+                          <br><br>
+                          This story map further extends the vision by creating an online interactive platform to visualize and analyze the key measures for Oregon counties.</p>
+                        <p><b>storymap.js</b> | Released Date: 02/20/2017 | Version: 2.5 | MIT License </p>
+                        <p><b>Author: Benjamin Antolin</b>| Oregon State University
+                        </p>
+                        <p>The <a href="https://youtu.be/V2vwFS8ae2I">background video</a> on the front page
+                            was clipped from Youtube. </p>
+                        <p>The context and data about key measures was collected from the Oregon by the Numbers 2018 Edition Report.</p>
+                        <p>The favicon image was acquired from <a href="https://en.wikipedia.org/wiki/List_of_Oregon_state_symbols">Wikipedia</a></p>
+                        <p>This story map uses geospatial data from cartodb and Oregon Explorer.</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+        </div>
+
+    </footer>
+
+</div>
+
 </body>
+
 </html>

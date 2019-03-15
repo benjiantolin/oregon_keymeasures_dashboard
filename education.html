@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Oregon by the Counties</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--meta data for sharing links on Facebook-->
+    <meta property="og:title" content="Oregon by the Counties"/>
+    <meta property="og:url" content="http://benjiantolin.github.io/obtcstorymap/index.html"/>
+    <meta property="og:description" content="This is a storymap using sample measures from Oregon by the Numbers."/>
+
+
+    <!--add required stylesheets-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!--leaflet css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+
+
+    <!--add favicon for the web page-->
+    <link rel="shortcut icon" href="img/oregon.ico" type="image/x-icon">
+
+    <!--Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Cairo|Lato" rel="stylesheet">
+
+
+    <link rel="stylesheet" type="text/css" href="css/storymap.2.5.css">
+    <!--add required libraries-->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.js"></script>
+    <!--jquery-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+
+    <!--boostrap-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!--leaflet.ajax for asynchronously adding geojson data-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
+
+    <!--mini globle map-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.19/topojson.min.js"></script>
+    <script src="js/globeminimap.js"></script>
+
+    <!--story map plugin-->
+    <script src="js/storymap.2.5.js"></script>
+</head>
+<body>
+
+<div id="storymap" class="container-fluid">
+    <div class="row">
+        <div class="col-sm-6 col-md-4 storymap-story">
+            <section data-scene="overview" data-background="assets/oregon_scenery.mp4">
+                <div class="fullscreen text-center">
+                  <div class="row justify-content-center align-items-center">
+                    <span style="font-size: 2rem;">
+                      <a href="index.html"><i class="fas fa-home"></i></a>
+                      <a href="demographic.html"><i class="fas fa-users"></i></a>
+                      <a href="social.html"><i class="fas fa-shopping-basket"></i></a>
+                      <a href="economic.html"><i class="fas fa-chart-line"></i></a>
+                      <a href="education.html"><i class="fas fa-user-graduate"></i></a>
+                      <a href="health.html"><i class="fas fa-medkit"></i></a>
+                      <a href="infrastructure.html"><i class="fas fa-road"></i></a>
+                  </span>
+                  </div>
+                    <h1 class="display-4 d-flex justify-content-center">Education Measures</h1>
+                    <h3 class="d-flex justify-content-center" style="color: rgba(255,255,255,0.95)">
+                      <i>A sample of community measures for Oregon and its counties</i>
+                    </h3>
+                </div>
+            </section>
+            <section data-scene="totpop">
+              <h2>Total Population</h2>
+              <h5><i><b>Definition:</b> The total number of individuals living within a county’s designated boundaries.</i></h5>
+              <p>Population size provides insight into the nature of a county’s
+                residential communities. This measure is also important for tracking
+                growth or declines within a specific county and making comparisons
+                across counties.</P>
+              <p>Changes in population occur through births, deaths
+                 and migration. Such shifts can indicate whether a county is attracting
+                 new residents, or when an economy is struggling or prosperous. Total
+                 population as a measure also helps in planning for current and future
+                 community needs. </p>
+            </section>
+
+            <section data-scene="ruralpop">
+              <h2>Rural Population</h2>
+              <h5><i><b>Definition:</b> The percentage of people who reside outside of Census-designated urban areas or clusters in a given county.</i></h5>
+              <p> Rural communities, especially those defined as rural according to the
+                  U.S. Census guidelines, present significantly different contexts from
+                  their urban and suburban counterparts. The strengths, needs and
+                  capacities of rural communities differ accordingly.</p>
+              <p>In Oregon, where there are only 12 cities with population greater than 50,000, knowing
+                 the proportion of the rural population in a county allows decision
+                 makers to develop more balanced strategies to support different types
+                 of communities. </p>
+            </section>
+
+            <section data-scene="netmigrate">
+              <h2>Net Migration</h2>
+              <h5><i><b>Definition:</b> Net migration is the change in population due to people moving in or out of a given area over a specified time period per 1,000 residents.</i></h5>
+              <p>A positive net migration means more people are moving into a county
+                 than are leaving, while a negative value means more people are
+                 moving out of a county than moving in. </p>
+              <p>Overall, urban areas in Oregon tend to have higher rates of net migration than in rural, but there are
+                 exceptions for individual counties. It is important for businesses and
+                 local leaders to understand net migration in order to anticipate the
+                 county’s future demands.</p>
+              <p> Population growth resulting from migration requires different resources than growth caused by natural increase.
+                  Understanding the various contributors to population change is
+                  important for long-range planning</p>
+            </section>
+
+            <section data-scene="hcb">
+              <h2>Housing Cost Burden</h2>
+              <h5><i><b>Definition:</b> The percentage of households, both renters and owners, paying 30% or greater of their income on rent or mortgage.</i> </h5>
+              <p>Housing cost burden provides a measure of a county’s affordability. The
+                 Department of Housing and Urban Development (HUD) has established
+                 the “30 percent rule,” meaning that households should spend no more
+                 than 30 percent of their income on housing.</p>
+              <p>Some criticize the rule
+                 for being oversimplified. For example, it does not take into account
+                 income level. Still, housing cost burden provides a measure of the
+                 number of households that may be at risk of eviction, foreclosure,
+                 and/or homelessness.</p>
+              <p>This measure is a key success indicator for
+                 affordable housing efforts. Those facing housing cost burden also may
+                 face challenges spending money in other domains, including food,
+                 transportation, health or education.</p>
+            </section>
+
+            <section data-scene="end" data-background="img/mthood.jpg">
+                <div class="fullscreen text-center">
+                    <h1 class="display-4 d-flex justify-content-center">For more infromation about Oregon and its counties visit:</h1>
+                    <h4 class="d-flex justify-content-center" style="color: rgba(255,255,255,0.95)">
+                      <a href="https://www.tfff.org/select-books/book/oregon-numbers">Oregon by the Numbers 2018 Edition</a>
+                    </h4>
+                </div>
+            </section>
+
+        </div>
+        <!--map div-->
+        <div class="col-sm-6 col-md-8 storymap-map"></div>
+    </div>
+
+    <dl>
+        <dt>
+            <!--facebook icon-->
+            <a class="fab fa-facebook-square btn"
+               href="https://facebook.com/sharer.php?u=http://benjiantolin.github.io/obtcstorymap/index.html"
+               target="_blank"></a>
+        </dt>
+        <dt>
+            <!--github icon-->
+            <a class="fab fa-github btn" href="https://github.com/benjiantolin/obtcstorymap" style="top:40px"
+               target="_blank"></a>
+        </dt>
+        <dt>
+            <!--info icon-->
+            <i class="fas fa-info-circle btn" style="top:60px" data-toggle="modal" data-target="#info-modal"></i>
+        </dt>
+    </dl>
+
+    <!--the info page-->
+    <div class="modal fade" id="info-modal" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">About</h4>
+                </div>
+                <div class="modal-body">
+                  <p>This is a story map that contains a sample of key measures borrowed from the <a href="https://www.tfff.org/select-books/book/oregon-numbers">Oregon by the Numbers 2018 Edition</a> report.
+                    <br><br>
+                    A handful of the key measures provided in the report are further visualize the data using a
+                    dynamic online interface. The goal of report is to get information to local community leaders, to
+                    encorage data driven decision making.
+                    <br><br>
+                    This story map further extends the vision by creating an online interactive platform to visualize and analyze the key measures for Oregon counties.</p>
+                  <p><b>storymap.js</b> | Released Date: 02/20/2017 | Version: 2.5 | MIT License </p>
+                  <p><b>Author: Benjamin Antolin</b>| Oregon State University
+                  </p>
+                  <p>The <a href="https://youtu.be/V2vwFS8ae2I">background video</a> on the front page
+                      was clipped from Youtube. </p>
+                  <p>The context and data about key measures was collected from the Oregon by the Numbers 2018 Edition Report.</p>
+                  <p>The favicon image was acquired from <a href="https://en.wikipedia.org/wiki/List_of_Oregon_state_symbols">Wikipedia</a></p>
+                  <p>This story map uses geospatial data from cartodb and Oregon Explorer.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- main javascript -->
+<script type="text/javascript">
+
+    //////////////////////////////////////////////////////////////////////////
+    // Scene 2: Total Population Choropleth
+    // Set function for color ramp
+    function setColor1(density){
+        //Tenary operation: condition ? valueIfTrue : valueIfFalse
+        // condition ? value1 : value2
+        return  density > 564088 ? '#b30000' :
+                density > 210916 ? '#e34a33' :
+                density > 87455 ? '#fc8d59' :
+                density > 37660 ? '#fdcc8a' :
+                '#fef0d9';
+    }
+
+    // Set style function that sets fill color property equal to Total Population
+    function style1(feature) {
+        return {
+            fillColor: setColor1(feature.properties.Total_Popu),
+            fillOpacity: 0.5,
+            weight: 2,
+            opacity: 0.8,
+            color: '#605f5f',
+            dashArray: '4'
+        };
+    }
+
+    var counties_totpop = L.geoJson.ajax('assets/counties.geojson',
+        {
+            style: style1,
+            onEachFeature: function (feature, layer) {
+                layer.bindTooltip(feature.properties.altName+"<br> Total Pop: "+ feature.properties.Total_Popu , {className: 'feature-label', permanent: false, direction: 'center'});
+            }
+        });
+
+
+    var counties_totpop_legend = '<p><b>Total Population</b></p>' +
+        '<i style="background: #fef0d9; opacity: 0.5"></i><p><b>0 - 37,660</b></p>' +
+        '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>37,661 - 87,455</b></p>' +
+        '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>87,456 - 210,916</b></p>' +
+        '<i style="background: #e34a33; opacity: 0.5"></i><p><b>210,917 - 564,088</b></p>' +
+        '<i style="background: #b30000; opacity: 0.5"></i><p><b>>564,088</b></p>';
+
+
+
+        //////////////////////////////////////////////////////////////////////////
+        // Scene 3: Rural Population Percentage
+
+        // Set function for color ramp
+        function setColor2(density){
+            //Tenary operation: condition ? valueIfTrue : valueIfFalse
+            // condition ? value1 : value2
+            return  density > 100 ? '#b30000' :
+                    density > 75 ? '#e34a33' :
+                    density > 50 ? '#fc8d59' :
+                    density > 25 ? '#fdcc8a' :
+                    '#fef0d9';
+        }
+
+        // Set style function that sets fill color property equal to percentage of rural population
+        function style2(feature) {
+            return {
+                fillColor: setColor2(feature.properties.Rural_Popu),
+                fillOpacity: 0.5,
+                weight: 2,
+                opacity: 0.8,
+                color: '#605f5f',
+                dashArray: '4'
+            };
+        }
+
+        var counties_ruralpop = L.geoJson.ajax('assets/counties.geojson',
+            {
+                style: style2,
+                onEachFeature: function (feature, layer) {
+                    layer.bindTooltip(feature.properties.altName+"<br> Rural Pop: "+ (feature.properties.Rural_Popu).toFixed(2) + "%", {className: 'feature-label', permanent: false, direction: 'center'});
+                }
+            });
+
+
+        var counties_ruralpop_legend = '<p><b>Rural Population</b></p>' +
+            '<i style="background: #fef0d9; opacity: 0.5"></i><p><b>0% - 25%</b></p>' +
+            '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>25.1% - 50%</b></p>' +
+            '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>50.1% - 75%</b></p>' +
+            '<i style="background: #e34a33; opacity: 0.5"></i><p><b>75.1% - 100%</b></p>';
+
+            //////////////////////////////////////////////////////////////////////////
+            // Scene 4: Net Migration
+
+            // Set function for color ramp
+            function setColor3(density){
+                //Tenary operation: condition ? valueIfTrue : valueIfFalse
+                // condition ? value1 : value2
+                return  density > 12.91705 ? '#b30000' :
+                        density > 7.76944 ? '#e34a33' :
+                        density > 3.193155 ? '#fc8d59' :
+                        density > -2.927277 ? '#fdcc8a' :
+                        '#fef0d9';
+            }
+
+            // Set style function that sets fill color property equal to net migration
+            function style3(feature) {
+                return {
+                    fillColor: setColor3(feature.properties.Migration),
+                    fillOpacity: 0.5,
+                    weight: 2,
+                    opacity: 0.8,
+                    color: '#605f5f',
+                    dashArray: '4'
+                };
+            }
+
+            var counties_netmigrate = L.geoJson.ajax('assets/counties.geojson',
+                {
+                    style: style3,
+                    onEachFeature: function (feature, layer) {
+                        layer.bindTooltip(feature.properties.altName+"<br> Net Migration: "+ (feature.properties.Migration).toFixed(2), {className: 'feature-label', permanent: false, direction: 'center'});
+                    }
+                });
+
+
+            var counties_netmigrate_legend = '<p><b>Net Migration</b></p>' +
+                '<i style="background: #fef0d9; opacity: 0.5"></i><p><b>-7.18 - -2.93</b></p>' +
+                '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>-2.92 - 3.19</b></p>' +
+                '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>3.20 - 7.77</b></p>' +
+                '<i style="background: #e34a33; opacity: 0.5"></i><p><b>7.78 - 12.92</b></p>'+
+                '<i style="background: #b30000; opacity: 0.5"></i><p><b>>12.93</b></p>';
+
+                // Scene 5: Housing Cost Burden
+
+
+                    // Set function for color ramp
+                    function setColor4(density){
+                        //Tenary operation: condition ? valueIfTrue : valueIfFalse
+                        // condition ? value1 : value2
+                        return  density > 38.111159 ? '#b30000' :
+                                density > 34.546092 ? '#e34a33' :
+                                density > 31.156108 ? '#fc8d59' :
+                                density > 26.767134 ? '#fdcc8a' :
+                                '#fef0d9';
+                    }
+
+                    // Set style function that sets fill color property equal to the housing cost burden
+                    function style4(feature) {
+                        return {
+                            fillColor: setColor4(feature.properties.Housing_Co),
+                            fillOpacity: 0.5,
+                            weight: 2,
+                            opacity: 0.8,
+                            color: '#605f5f',
+                            dashArray: '4'
+                        };
+                    }
+
+                    var counties_hcb = L.geoJson.ajax('assets/counties.geojson',
+                        {
+                            style: style4,
+                            onEachFeature: function (feature, layer) {
+                                layer.bindTooltip(feature.properties.altName+"<br> Housing Cost Burden: "+ (feature.properties.Housing_Co).toFixed(2)+ "%", {className: 'feature-label', permanent: false, direction: 'center'});
+                            }
+                        });
+
+
+                    var counties_hcb_legend = '<p><b>Housing Cost Burden</b></p>' +
+                        '<i style="background: #fef0d9; opacity: 0.5"></i><p><b>23.02 - 26.77</b></p>' +
+                        '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>26.78 - 31.16</b></p>' +
+                        '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>31.17 - 34.55</b></p>' +
+                        '<i style="background: #e34a33; opacity: 0.5"></i><p><b>34.56 - 38.11</b></p>'+
+                        '<i style="background: #b30000; opacity: 0.5"></i><p><b>>38.12</b></p>';
+
+                //////////////////////////////////////////////////////////////////////////
+
+
+    var layers = {
+        ESRI: {layer: L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}')},
+        counties_totpop: {
+            layer: counties_totpop, legend: counties_totpop_legend
+        },
+        counties_ruralpop: {
+            layer: counties_ruralpop, legend: counties_ruralpop_legend
+        },
+        counties_netmigrate: {
+            layer: counties_netmigrate, legend: counties_netmigrate_legend
+        },
+        counties_hcb: {
+            layer: counties_hcb, legend: counties_hcb_legend
+        },
+        GEE: {
+            layer: L.tileLayer('http://earthengine.google.org/static/hansen_2013/tree_alpha/{z}/{x}/{y}.png'),
+
+        },
+        satellite: {
+            layer: L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiamFrb2J6aGFvIiwiYSI6ImNpcms2YWsyMzAwMmtmbG5icTFxZ3ZkdncifQ.P9MBej1xacybKcDN_jehvw', {
+                id: 'mapbox.satellite'
+            })
+        },
+        cartodb_light: {layer: L.tileLayer('http://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}@2x.png')}
+    };
+
+    var scenes = {
+        overview: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: 'Cover Page', layers: []},
+        totpop: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: 'Total Population', layers: [layers.counties_totpop]},
+        ruralpop: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: 'Rural Population', layers: [layers.counties_ruralpop]},
+        netmigrate: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: 'Net Migration', layers: [layers.counties_netmigrate]},
+        hcb: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: 'Housing Burden Cost', layers: [layers.counties_hcb]},
+        end: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: 'The End'}
+    };
+
+    $('#storymap').storymap({
+        scenes: scenes,
+        baselayer: layers.cartodb_light,
+        legend: true, // if you do not want a legend feature, you can simply not define the createLegend function.
+        credits: "",
+        loader: true,
+        scalebar: false,
+        flyo: true,
+        navwidget: true,
+
+        createMap: function () {
+            // create a map in the "map" div, set the view to a given place and zoom
+            var map = L.map($(".storymap-map")[0], {
+                zoomControl: false, scrollWheelZoom: false, fadeAnimation: true,
+                zoomAnimation: true
+            }).setView([44, -120], 7);
+
+            //add an miniglobe
+            new L.Control.GlobeMiniMap({
+                marker: 'red',
+                position: 'bottomright'
+            }).addTo(map);
+
+
+            return map;
+        }
+    });
+</script>
+</body>
+</html>
