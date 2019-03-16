@@ -140,6 +140,58 @@
                  can limit community progress.</p>
             </section>
 
+            <section data-scene="childabuse">
+              <h2>Child Abuse</h2>
+              <h5><i><b>Definition:</b>The number of children in a county who were victims of
+                                       child abuse or neglect per 1,000 in the population under 18 years
+                                       of age. </p>
+              <p>Child abuse is a serious problem in our country. Among industrialized
+                 nations, the United States has one of the highest rates of child death
+                 by abuse. Child abuse negatively affects the wellbeing of young people
+                 in our communities now and in the long run.</p>
+              <p>Experiencing abuse
+                 as a child contributes to poor physical and mental health well into
+                 adulthood. The compounding costs of medical care, lost productivity,
+                 child welfare services, criminal justice and specialized education
+                 services all place an additional burden on counties — above and
+                 beyond the human suffering associated with child abuse.
+                 Community economic stress can contribute to rates of child abuse,
+                 creating a vicious cycle.</p>
+            </section>
+
+            <section data-scene="crime">
+              <h2>Index Crime</h2>
+              <h5><i><b>Definition:</b>The annual number of index crime offenses per
+                                       1,000 residents in a county. Index crimes include willful murder,
+                                       forcible rape, robbery, aggravated assault, burglary, theft
+                                       and arson.</p>
+              <p>Crime rates are a measure of the relative safety of an area, but
+                 crime also has important social and economic influences on
+                 communities. High rates of crime are associated with population
+                 mobility, weaker attachment of residents to their community, less
+                 local involvement and lower home values.</p>
+              <p>The index crime rate is
+                 created to provide a standard measure of particularly important
+                 crimes against people and property across the United States.
+                 Tracking crime supports law enforcement operations, public safety
+                 budgeting and local community development efforts.</p>
+            </section>
+
+            <section data-scene="vote">
+              <h2>Voter Participation</h2>
+              <h5><i><b>Definition:</b>The percentage of registered voters who participated in
+                                       biennial general elections.</p>
+              <p>Voter participation has long served as a secondary measure of social
+                 capital. The relationship between voting and social connections has
+                 been heavily researched with little consensus. In the absence of an
+                 alternative measure, voter participation continues as an important
+                 proxy for civic engagement and community social capital.</p>
+              <p>This in turn
+                 reflects community capacity. The state of Oregon has implemented
+                 multiple policies over the years to increase voter participation, such as
+                 mail-in ballots and automatic voter registration. The state reports some
+                 of the highest voter participation rates in the country</p>
+            </section>
 
 
             <section data-scene="end" data-background="img/mthood.jpg">
@@ -208,15 +260,15 @@
 <script type="text/javascript">
 
     //////////////////////////////////////////////////////////////////////////
-    // Scene 2: Total Population Choropleth
+    // Scene 2: Food Insecurity Choropleth
     // Set function for color ramp
     function setColor1(density){
         //Tenary operation: condition ? valueIfTrue : valueIfFalse
         // condition ? value1 : value2
-        return  density > 564088 ? '#b30000' :
-                density > 210916 ? '#e34a33' :
-                density > 87455 ? '#fc8d59' :
-                density > 37660 ? '#fdcc8a' :
+        return  density > 15.71 ? '#b30000' :
+                density > 14.61 ? '#e34a33' :
+                density > 12.91 ? '#fc8d59' :
+                density > 8.81 ? '#fdcc8a' :
                 '#fef0d9';
     }
 
@@ -241,7 +293,7 @@
         });
 
 
-    var counties_totpop_legend = '<p><b>Total Population</b></p>' +
+    var counties_totpop_legend = '<p><b>Food Insecurity</b></p>' +
         '<i style="background: #fef0d9; opacity: 0.5"></i><p><b>0 - 37,660</b></p>' +
         '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>37,661 - 87,455</b></p>' +
         '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>87,456 - 210,916</b></p>' +
