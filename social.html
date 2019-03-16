@@ -303,16 +303,16 @@
 
 
         //////////////////////////////////////////////////////////////////////////
-        // Scene 3: Rural Population Percentage
+        // Scene 3: Property tax per capita
 
         // Set function for color ramp
         function setColor2(density){
             //Tenary operation: condition ? valueIfTrue : valueIfFalse
             // condition ? value1 : value2
-            return  density > 100 ? '#b30000' :
-                    density > 75 ? '#e34a33' :
-                    density > 50 ? '#fc8d59' :
-                    density > 25 ? '#fdcc8a' :
+            return  density > 2707.55 ? '#b30000' :
+                    density > 2035.12 ? '#e34a33' :
+                    density > 1358.22 ? '#fc8d59' :
+                    density > 1028.83 ? '#fdcc8a' :
                     '#fef0d9';
         }
 
@@ -344,16 +344,16 @@
             '<i style="background: #e34a33; opacity: 0.5"></i><p><b>75.1% - 100%</b></p>';
 
             //////////////////////////////////////////////////////////////////////////
-            // Scene 4: Net Migration
+            // Scene 4: Housing Cost Burden
 
             // Set function for color ramp
             function setColor3(density){
                 //Tenary operation: condition ? valueIfTrue : valueIfFalse
                 // condition ? value1 : value2
-                return  density > 12.91705 ? '#b30000' :
-                        density > 7.76944 ? '#e34a33' :
-                        density > 3.193155 ? '#fc8d59' :
-                        density > -2.927277 ? '#fdcc8a' :
+                return  density > 38.12 ? '#b30000' :
+                        density > 34.56 ? '#e34a33' :
+                        density > 31.17 ? '#fc8d59' :
+                        density > 26.78 ? '#fdcc8a' :
                         '#fef0d9';
             }
 
@@ -385,17 +385,18 @@
                 '<i style="background: #e34a33; opacity: 0.5"></i><p><b>7.78 - 12.92</b></p>'+
                 '<i style="background: #b30000; opacity: 0.5"></i><p><b>>12.93</b></p>';
 
-                // Scene 5: Housing Cost Burden
+      //////////////////////////////////////////////////////////////////////////
+                // Scene 5: Child Poverty
 
 
                     // Set function for color ramp
                     function setColor4(density){
                         //Tenary operation: condition ? valueIfTrue : valueIfFalse
                         // condition ? value1 : value2
-                        return  density > 38.111159 ? '#b30000' :
-                                density > 34.546092 ? '#e34a33' :
-                                density > 31.156108 ? '#fc8d59' :
-                                density > 26.767134 ? '#fdcc8a' :
+                        return  density > 29.92 ? '#b30000' :
+                                density > 23.94 ? '#e34a33' :
+                                density > 19.22 ? '#fc8d59' :
+                                density > 10.98 ? '#fdcc8a' :
                                 '#fef0d9';
                     }
 
@@ -428,7 +429,136 @@
                         '<i style="background: #b30000; opacity: 0.5"></i><p><b>>38.12</b></p>';
 
                 //////////////////////////////////////////////////////////////////////////
+                          // Scene 6: Child Abuse
 
+
+                              // Set function for color ramp
+                              function setColor5(density){
+                                  //Tenary operation: condition ? valueIfTrue : valueIfFalse
+                                  // condition ? value1 : value2
+                                  return  density > 35.04 ? '#b30000' :
+                                          density > 25.78 ? '#e34a33' :
+                                          density > 16.32 ? '#fc8d59' :
+                                          density > 9.10 ? '#fdcc8a' :
+                                          '#fef0d9';
+                              }
+
+                              // Set style function that sets fill color property equal to the housing cost burden
+                              function style5(feature) {
+                                  return {
+                                      fillColor: setColor5(feature.properties.Housing_Co),
+                                      fillOpacity: 0.5,
+                                      weight: 2,
+                                      opacity: 0.8,
+                                      color: '#605f5f',
+                                      dashArray: '4'
+                                  };
+                              }
+
+                              var counties_hcb = L.geoJson.ajax('assets/counties.geojson',
+                                  {
+                                      style: style5,
+                                      onEachFeature: function (feature, layer) {
+                                          layer.bindTooltip(feature.properties.altName+"<br> Housing Cost Burden: "+ (feature.properties.Housing_Co).toFixed(2)+ "%", {className: 'feature-label', permanent: false, direction: 'center'});
+                                      }
+                                  });
+
+
+                              var counties_hcb_legend = '<p><b>Housing Cost Burden</b></p>' +
+                                  '<i style="background: #fef0d9; opacity: 0.5"></i><p><b>23.02 - 26.77</b></p>' +
+                                  '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>26.78 - 31.16</b></p>' +
+                                  '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>31.17 - 34.55</b></p>' +
+                                  '<i style="background: #e34a33; opacity: 0.5"></i><p><b>34.56 - 38.11</b></p>'+
+                                  '<i style="background: #b30000; opacity: 0.5"></i><p><b>>38.12</b></p>';
+
+                          //////////////////////////////////////////////////////////////////////////
+                          // Scene 7: Index Crime
+
+
+                              // Set function for color ramp
+                              function setColor6(density){
+                                  //Tenary operation: condition ? valueIfTrue : valueIfFalse
+                                  // condition ? value1 : value2
+                                  return  density > 36.05 ? '#b30000' :
+                                          density > 25.15 ? '#e34a33' :
+                                          density > 17.31 ? '#fc8d59' :
+                                          density > 7.00 ? '#fdcc8a' :
+                                          '#fef0d9';
+                              }
+
+                              // Set style function that sets fill color property equal to the housing cost burden
+                              function style6(feature) {
+                                  return {
+                                      fillColor: setColor6(feature.properties.Housing_Co),
+                                      fillOpacity: 0.5,
+                                      weight: 2,
+                                      opacity: 0.8,
+                                      color: '#605f5f',
+                                      dashArray: '4'
+                                  };
+                              }
+
+                              var counties_hcb = L.geoJson.ajax('assets/counties.geojson',
+                                  {
+                                      style: style6,
+                                      onEachFeature: function (feature, layer) {
+                                          layer.bindTooltip(feature.properties.altName+"<br> Housing Cost Burden: "+ (feature.properties.Housing_Co).toFixed(2)+ "%", {className: 'feature-label', permanent: false, direction: 'center'});
+                                      }
+                                  });
+
+
+                              var counties_hcb_legend = '<p><b>Housing Cost Burden</b></p>' +
+                                  '<i style="background: #fef0d9; opacity: 0.5"></i><p><b>23.02 - 26.77</b></p>' +
+                                  '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>26.78 - 31.16</b></p>' +
+                                  '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>31.17 - 34.55</b></p>' +
+                                  '<i style="background: #e34a33; opacity: 0.5"></i><p><b>34.56 - 38.11</b></p>'+
+                                  '<i style="background: #b30000; opacity: 0.5"></i><p><b>>38.12</b></p>';
+
+                          //////////////////////////////////////////////////////////////////////////
+
+                          // Scene 8: Voter Participation
+
+
+                              // Set function for color ramp
+                              function setColor7(density){
+                                  //Tenary operation: condition ? valueIfTrue : valueIfFalse
+                                  // condition ? value1 : value2
+                                  return  density > 84.51 ? '#b30000' :
+                                          density > 81.81 ? '#e34a33' :
+                                          density > 79.91 ? '#fc8d59' :
+                                          density > 73.3 ? '#fdcc8a' :
+                                          '#fef0d9';
+                              }
+
+                              // Set style function that sets fill color property equal to the housing cost burden
+                              function style7(feature) {
+                                  return {
+                                      fillColor: setColor7(feature.properties.Housing_Co),
+                                      fillOpacity: 0.5,
+                                      weight: 2,
+                                      opacity: 0.8,
+                                      color: '#605f5f',
+                                      dashArray: '4'
+                                  };
+                              }
+
+                              var counties_hcb = L.geoJson.ajax('assets/counties.geojson',
+                                  {
+                                      style: style7,
+                                      onEachFeature: function (feature, layer) {
+                                          layer.bindTooltip(feature.properties.altName+"<br> Housing Cost Burden: "+ (feature.properties.Housing_Co).toFixed(2)+ "%", {className: 'feature-label', permanent: false, direction: 'center'});
+                                      }
+                                  });
+
+
+                              var counties_hcb_legend = '<p><b>Housing Cost Burden</b></p>' +
+                                  '<i style="background: #fef0d9; opacity: 0.5"></i><p><b>23.02 - 26.77</b></p>' +
+                                  '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>26.78 - 31.16</b></p>' +
+                                  '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>31.17 - 34.55</b></p>' +
+                                  '<i style="background: #e34a33; opacity: 0.5"></i><p><b>34.56 - 38.11</b></p>'+
+                                  '<i style="background: #b30000; opacity: 0.5"></i><p><b>>38.12</b></p>';
+
+                          //////////////////////////////////////////////////////////////////////////
 
     var layers = {
         ESRI: {layer: L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}')},

@@ -221,15 +221,15 @@
 <script type="text/javascript">
 
     //////////////////////////////////////////////////////////////////////////
-    // Scene 2: Total Population Choropleth
+    // Scene 2: Early education
     // Set function for color ramp
     function setColor1(density){
         //Tenary operation: condition ? valueIfTrue : valueIfFalse
         // condition ? value1 : value2
-        return  density > 564088 ? '#b30000' :
-                density > 210916 ? '#e34a33' :
-                density > 87455 ? '#fc8d59' :
-                density > 37660 ? '#fdcc8a' :
+        return  density > 49.24 ? '#b30000' :
+                density > 43.43 ? '#e34a33' :
+                density > 37.03 ? '#fc8d59' :
+                density > 24.01 ? '#fdcc8a' :
                 '#fef0d9';
     }
 
@@ -264,16 +264,16 @@
 
 
         //////////////////////////////////////////////////////////////////////////
-        // Scene 3: Rural Population Percentage
+        // Scene 3: 4 year deg
 
         // Set function for color ramp
         function setColor2(density){
             //Tenary operation: condition ? valueIfTrue : valueIfFalse
             // condition ? value1 : value2
-            return  density > 100 ? '#b30000' :
-                    density > 75 ? '#e34a33' :
-                    density > 50 ? '#fc8d59' :
-                    density > 25 ? '#fdcc8a' :
+            return  density > 34.07 ? '#b30000' :
+                    density > 26.07 ? '#e34a33' :
+                    density > 19.19 ? '#fc8d59' :
+                    density > 13.28 ? '#fdcc8a' :
                     '#fef0d9';
         }
 
@@ -305,16 +305,16 @@
             '<i style="background: #e34a33; opacity: 0.5"></i><p><b>75.1% - 100%</b></p>';
 
             //////////////////////////////////////////////////////////////////////////
-            // Scene 4: Net Migration
+            // Scene 4: 2 Year deg
 
             // Set function for color ramp
             function setColor3(density){
                 //Tenary operation: condition ? valueIfTrue : valueIfFalse
                 // condition ? value1 : value2
-                return  density > 12.91705 ? '#b30000' :
-                        density > 7.76944 ? '#e34a33' :
-                        density > 3.193155 ? '#fc8d59' :
-                        density > -2.927277 ? '#fdcc8a' :
+                return  density > 9.66 ? '#b30000' :
+                        density > 8.99 ? '#e34a33' :
+                        density > 8.45 ? '#fc8d59' :
+                        density > 7.46 ? '#fdcc8a' :
                         '#fef0d9';
             }
 
@@ -346,17 +346,17 @@
                 '<i style="background: #e34a33; opacity: 0.5"></i><p><b>7.78 - 12.92</b></p>'+
                 '<i style="background: #b30000; opacity: 0.5"></i><p><b>>12.93</b></p>';
 
-                // Scene 5: Housing Cost Burden
+                // Scene 5: High School Grad Rate
 
 
                     // Set function for color ramp
                     function setColor4(density){
                         //Tenary operation: condition ? valueIfTrue : valueIfFalse
                         // condition ? value1 : value2
-                        return  density > 38.111159 ? '#b30000' :
-                                density > 34.546092 ? '#e34a33' :
-                                density > 31.156108 ? '#fc8d59' :
-                                density > 26.767134 ? '#fdcc8a' :
+                        return  density > 84.48 ? '#b30000' :
+                                density > 76.19 ? '#e34a33' :
+                                density > 63.51 ? '#fc8d59' :
+                                density > 18.11 ? '#fdcc8a' :
                                 '#fef0d9';
                     }
 
@@ -390,6 +390,49 @@
 
                 //////////////////////////////////////////////////////////////////////////
 
+                // Scene 6: Higher Education Enrollment
+
+
+                    // Set function for color ramp
+                    function setColor5(density){
+                        //Tenary operation: condition ? valueIfTrue : valueIfFalse
+                        // condition ? value1 : value2
+                        return  density > 123.31 ? '#b30000' :
+                                density > 68.6 ? '#e34a33' :
+                                density > 40.01 ? '#fc8d59' :
+                                density > 10.22 ? '#fdcc8a' :
+                                '#fef0d9';
+                    }
+
+                    // Set style function that sets fill color property equal to the housing cost burden
+                    function style5(feature) {
+                        return {
+                            fillColor: setColor5(feature.properties.Housing_Co),
+                            fillOpacity: 0.5,
+                            weight: 2,
+                            opacity: 0.8,
+                            color: '#605f5f',
+                            dashArray: '4'
+                        };
+                    }
+
+                    var counties_hcb = L.geoJson.ajax('assets/counties.geojson',
+                        {
+                            style: style5,
+                            onEachFeature: function (feature, layer) {
+                                layer.bindTooltip(feature.properties.altName+"<br> Housing Cost Burden: "+ (feature.properties.Housing_Co).toFixed(2)+ "%", {className: 'feature-label', permanent: false, direction: 'center'});
+                            }
+                        });
+
+
+                    var counties_hcb_legend = '<p><b>Housing Cost Burden</b></p>' +
+                        '<i style="background: #fef0d9; opacity: 0.5"></i><p><b>23.02 - 26.77</b></p>' +
+                        '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>26.78 - 31.16</b></p>' +
+                        '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>31.17 - 34.55</b></p>' +
+                        '<i style="background: #e34a33; opacity: 0.5"></i><p><b>34.56 - 38.11</b></p>'+
+                        '<i style="background: #b30000; opacity: 0.5"></i><p><b>>38.12</b></p>';
+
+                //////////////////////////////////////////////////////////////////////////
 
     var layers = {
         ESRI: {layer: L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}')},

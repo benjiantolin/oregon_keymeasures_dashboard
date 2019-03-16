@@ -204,22 +204,22 @@
 <script type="text/javascript">
 
     //////////////////////////////////////////////////////////////////////////
-    // Scene 2: Total Population Choropleth
+    // Scene 2: Median Income Choropleth
     // Set function for color ramp
     function setColor1(density){
         //Tenary operation: condition ? valueIfTrue : valueIfFalse
         // condition ? value1 : value2
-        return  density > 564088 ? '#b30000' :
-                density > 210916 ? '#e34a33' :
-                density > 87455 ? '#fc8d59' :
-                density > 37660 ? '#fdcc8a' :
+        return  density > 57450 ? '#b30000' :
+                density > 49288 ? '#e34a33' :
+                density > 42350 ? '#fc8d59' :
+                density > 34721 ? '#fdcc8a' :
                 '#fef0d9';
     }
 
     // Set style function that sets fill color property equal to Total Population
     function style1(feature) {
         return {
-            fillColor: setColor1(feature.properties.Total_Popu),
+            fillColor: setColor1(feature.properties.medinc),
             fillOpacity: 0.5,
             weight: 2,
             opacity: 0.8,
@@ -228,7 +228,7 @@
         };
     }
 
-    var counties_totpop = L.geoJson.ajax('assets/counties.geojson',
+    var counties_totpop = L.geoJson.ajax('assets/obtcFinalmin.geojson',
         {
             style: style1,
             onEachFeature: function (feature, layer) {
@@ -247,16 +247,16 @@
 
 
         //////////////////////////////////////////////////////////////////////////
-        // Scene 3: Rural Population Percentage
+        // Scene 3: Unemployment Rate
 
         // Set function for color ramp
         function setColor2(density){
             //Tenary operation: condition ? valueIfTrue : valueIfFalse
             // condition ? value1 : value2
-            return  density > 100 ? '#b30000' :
-                    density > 75 ? '#e34a33' :
-                    density > 50 ? '#fc8d59' :
-                    density > 25 ? '#fdcc8a' :
+            return  density > 6.71 ? '#b30000' :
+                    density > 5.91 ? '#e34a33' :
+                    density > 5.11 ? '#fc8d59' :
+                    density > 4.41 ? '#fdcc8a' :
                     '#fef0d9';
         }
 
@@ -288,16 +288,16 @@
             '<i style="background: #e34a33; opacity: 0.5"></i><p><b>75.1% - 100%</b></p>';
 
             //////////////////////////////////////////////////////////////////////////
-            // Scene 4: Net Migration
+            // Scene 4: LFPR
 
             // Set function for color ramp
             function setColor3(density){
                 //Tenary operation: condition ? valueIfTrue : valueIfFalse
                 // condition ? value1 : value2
-                return  density > 12.91705 ? '#b30000' :
-                        density > 7.76944 ? '#e34a33' :
-                        density > 3.193155 ? '#fc8d59' :
-                        density > -2.927277 ? '#fdcc8a' :
+                return  density > 62.82 ? '#b30000' :
+                        density > 58.42 ? '#e34a33' :
+                        density > 54.4 ? '#fc8d59' :
+                        density > 50.29 ? '#fdcc8a' :
                         '#fef0d9';
             }
 
@@ -329,17 +329,17 @@
                 '<i style="background: #e34a33; opacity: 0.5"></i><p><b>7.78 - 12.92</b></p>'+
                 '<i style="background: #b30000; opacity: 0.5"></i><p><b>>12.93</b></p>';
 
-                // Scene 5: Housing Cost Burden
+                // Scene 5: Job Growth
 
 
                     // Set function for color ramp
                     function setColor4(density){
                         //Tenary operation: condition ? valueIfTrue : valueIfFalse
                         // condition ? value1 : value2
-                        return  density > 38.111159 ? '#b30000' :
-                                density > 34.546092 ? '#e34a33' :
-                                density > 31.156108 ? '#fc8d59' :
-                                density > 26.767134 ? '#fdcc8a' :
+                        return  density > 18.4 ? '#b30000' :
+                                density > 8.75 ? '#e34a33' :
+                                density > .97 ? '#fc8d59' :
+                                density > -19.57 ? '#fdcc8a' :
                                 '#fef0d9';
                     }
 
