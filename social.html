@@ -212,12 +212,12 @@
         <dt>
             <!--facebook icon-->
             <a class="fab fa-facebook-square btn"
-               href="https://facebook.com/sharer.php?u=http://benjiantolin.github.io/obtcstorymap/index.html"
+               href="https://facebook.com/sharer.php?u=https://github.com/benjiantolin/oregon_keymeasures_dashboard/index.html"
                target="_blank"></a>
         </dt>
         <dt>
             <!--github icon-->
-            <a class="fab fa-github btn" href="https://github.com/benjiantolin/obtcstorymap" style="top:40px"
+            <a class="fab fa-github btn" href="https://github.com/benjiantolin/oregon_keymeasures_dashboard" style="top:40px"
                target="_blank"></a>
         </dt>
         <dt>
@@ -246,7 +246,7 @@
                   <p><b>Author: Benjamin Antolin</b>| Oregon State University
                   </p>
                   <p>The <a href="https://youtu.be/V2vwFS8ae2I">background video</a> on the front page
-                      was clipped from Youtube. </p>
+                      is by Morissey Producations and was clipped from Youtube. </p>
                   <p>The context and data about key measures was collected from the Oregon by the Numbers 2018 Edition Report.</p>
                   <p>The favicon image was acquired from <a href="https://en.wikipedia.org/wiki/List_of_Oregon_state_symbols">Wikipedia</a></p>
                   <p>This story map uses geospatial data from cartodb and Oregon Explorer.</p>
@@ -275,7 +275,7 @@
     // Set style function that sets fill color property equal to Total Population
     function style1(feature) {
         return {
-            fillColor: setColor1(feature.properties.Total_Popu),
+            fillColor: setColor1(feature.properties.foodinsec),
             fillOpacity: 0.5,
             weight: 2,
             opacity: 0.8,
@@ -284,11 +284,11 @@
         };
     }
 
-    var counties_totpop = L.geoJson.ajax('assets/counties.geojson',
+    var counties_totpop = L.geoJson.ajax('assets/countiesnew.geojson',
         {
             style: style1,
             onEachFeature: function (feature, layer) {
-                layer.bindTooltip(feature.properties.altName+"<br> Total Pop: "+ feature.properties.Total_Popu , {className: 'feature-label', permanent: false, direction: 'center'});
+                layer.bindTooltip(feature.properties.altName+"<br> Total Pop: "+ feature.properties.foodinsec , {className: 'feature-label', permanent: false, direction: 'center'});
             }
         });
 

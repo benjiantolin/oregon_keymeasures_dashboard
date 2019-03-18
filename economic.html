@@ -156,12 +156,12 @@
         <dt>
             <!--facebook icon-->
             <a class="fab fa-facebook-square btn"
-               href="https://facebook.com/sharer.php?u=http://benjiantolin.github.io/obtcstorymap/index.html"
+               href="https://facebook.com/sharer.php?u=http://benjiantolin.github.io/oregon_keymeasures_dashboard/index.html"
                target="_blank"></a>
         </dt>
         <dt>
             <!--github icon-->
-            <a class="fab fa-github btn" href="https://github.com/benjiantolin/obtcstorymap" style="top:40px"
+            <a class="fab fa-github btn" href="https://github.com/benjiantolin/oregon_keymeasures_dashboard" style="top:40px"
                target="_blank"></a>
         </dt>
         <dt>
@@ -219,7 +219,7 @@
     // Set style function that sets fill color property equal to Total Population
     function style1(feature) {
         return {
-            fillColor: setColor1(feature.properties.medinc),
+            fillColor: setColor1(feature.properties.Median_Inc),
             fillOpacity: 0.5,
             weight: 2,
             opacity: 0.8,
@@ -228,21 +228,21 @@
         };
     }
 
-    var counties_totpop = L.geoJson.ajax('assets/obtcFinalmin.geojson',
+    var counties_totpop = L.geoJson.ajax('assets/counties.geojson',
         {
             style: style1,
             onEachFeature: function (feature, layer) {
-                layer.bindTooltip(feature.properties.altName+"<br> Total Pop: "+ feature.properties.Total_Popu , {className: 'feature-label', permanent: false, direction: 'center'});
+                layer.bindTooltip(feature.properties.altName+"<br> Median Income: $"+ feature.properties.Median_Inc , {className: 'feature-label', permanent: false, direction: 'center'});
             }
         });
 
 
-    var counties_totpop_legend = '<p><b>Total Population</b></p>' +
-        '<i style="background: #fef0d9; opacity: 0.5"></i><p><b>0 - 37,660</b></p>' +
-        '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>37,661 - 87,455</b></p>' +
-        '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>87,456 - 210,916</b></p>' +
-        '<i style="background: #e34a33; opacity: 0.5"></i><p><b>210,917 - 564,088</b></p>' +
-        '<i style="background: #b30000; opacity: 0.5"></i><p><b>>564,088</b></p>';
+    var counties_totpop_legend = '<p><b>Median Income ($)</b></p>' +
+        '<i style="background: #fef0d9; opacity: 0.5"></i><p><b>0 - 34720</b></p>' +
+        '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>34721 - 42349</b></p>' +
+        '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>42350 - 49288</b></p>' +
+        '<i style="background: #e34a33; opacity: 0.5"></i><p><b>49288 - 57450</b></p>' +
+        '<i style="background: #b30000; opacity: 0.5"></i><p><b>>57,450</b></p>';
 
 
 
@@ -263,7 +263,7 @@
         // Set style function that sets fill color property equal to percentage of rural population
         function style2(feature) {
             return {
-                fillColor: setColor2(feature.properties.Rural_Popu),
+                fillColor: setColor2(feature.properties.Unemployme),
                 fillOpacity: 0.5,
                 weight: 2,
                 opacity: 0.8,
@@ -276,16 +276,16 @@
             {
                 style: style2,
                 onEachFeature: function (feature, layer) {
-                    layer.bindTooltip(feature.properties.altName+"<br> Rural Pop: "+ (feature.properties.Rural_Popu).toFixed(2) + "%", {className: 'feature-label', permanent: false, direction: 'center'});
+                    layer.bindTooltip(feature.properties.altName+"<br> Unemployment Rate: "+ (feature.properties.Unemployme), {className: 'feature-label', permanent: false, direction: 'center'});
                 }
             });
 
 
-        var counties_ruralpop_legend = '<p><b>Rural Population</b></p>' +
-            '<i style="background: #fef0d9; opacity: 0.5"></i><p><b>0% - 25%</b></p>' +
-            '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>25.1% - 50%</b></p>' +
-            '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>50.1% - 75%</b></p>' +
-            '<i style="background: #e34a33; opacity: 0.5"></i><p><b>75.1% - 100%</b></p>';
+        var counties_ruralpop_legend = '<p><b>Unemployment Rate</b></p>' +
+            '<i style="background: #fef0d9; opacity: 0.5"></i><p><b>0% - 4.41%</b></p>' +
+            '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>5.11% - 5.90%</b></p>' +
+            '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>5.91% - 6.71%</b></p>' +
+            '<i style="background: #e34a33; opacity: 0.5"></i><p><b>> 6.71%</b></p>';
 
             //////////////////////////////////////////////////////////////////////////
             // Scene 4: LFPR
@@ -304,7 +304,7 @@
             // Set style function that sets fill color property equal to net migration
             function style3(feature) {
                 return {
-                    fillColor: setColor3(feature.properties.Migration),
+                    fillColor: setColor3(feature.properties.Labor_Forc),
                     fillOpacity: 0.5,
                     weight: 2,
                     opacity: 0.8,
@@ -317,17 +317,17 @@
                 {
                     style: style3,
                     onEachFeature: function (feature, layer) {
-                        layer.bindTooltip(feature.properties.altName+"<br> Net Migration: "+ (feature.properties.Migration).toFixed(2), {className: 'feature-label', permanent: false, direction: 'center'});
+                        layer.bindTooltip(feature.properties.altName+"<br> Rate: "+ (feature.properties.Labor_Forc).toFixed(2), {className: 'feature-label', permanent: false, direction: 'center'});
                     }
                 });
 
 
-            var counties_netmigrate_legend = '<p><b>Net Migration</b></p>' +
-                '<i style="background: #fef0d9; opacity: 0.5"></i><p><b>-7.18 - -2.93</b></p>' +
-                '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>-2.92 - 3.19</b></p>' +
-                '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>3.20 - 7.77</b></p>' +
-                '<i style="background: #e34a33; opacity: 0.5"></i><p><b>7.78 - 12.92</b></p>'+
-                '<i style="background: #b30000; opacity: 0.5"></i><p><b>>12.93</b></p>';
+            var counties_netmigrate_legend = '<p><b>Labor Force Particitpation Rate</b></p>' +
+                '<i style="background: #fef0d9; opacity: 0.5"></i><p><b>0 - 50.28</b></p>' +
+                '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>50.29 - 54.3</b></p>' +
+                '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>54.4 - 58.41</b></p>' +
+                '<i style="background: #e34a33; opacity: 0.5"></i><p><b>58.42 - 62.82</b></p>'+
+                '<i style="background: #b30000; opacity: 0.5"></i><p><b>>62.82</b></p>';
 
                 // Scene 5: Job Growth
 
@@ -346,7 +346,7 @@
                     // Set style function that sets fill color property equal to the housing cost burden
                     function style4(feature) {
                         return {
-                            fillColor: setColor4(feature.properties.Housing_Co),
+                            fillColor: setColor4(feature.properties.Job_Growth),
                             fillOpacity: 0.5,
                             weight: 2,
                             opacity: 0.8,
@@ -359,17 +359,17 @@
                         {
                             style: style4,
                             onEachFeature: function (feature, layer) {
-                                layer.bindTooltip(feature.properties.altName+"<br> Housing Cost Burden: "+ (feature.properties.Housing_Co).toFixed(2)+ "%", {className: 'feature-label', permanent: false, direction: 'center'});
+                                layer.bindTooltip(feature.properties.altName+"<br> Housing Cost Burden: "+ (feature.properties.Job_Growth), {className: 'feature-label', permanent: false, direction: 'center'});
                             }
                         });
 
 
-                    var counties_hcb_legend = '<p><b>Housing Cost Burden</b></p>' +
-                        '<i style="background: #fef0d9; opacity: 0.5"></i><p><b>23.02 - 26.77</b></p>' +
-                        '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>26.78 - 31.16</b></p>' +
-                        '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>31.17 - 34.55</b></p>' +
-                        '<i style="background: #e34a33; opacity: 0.5"></i><p><b>34.56 - 38.11</b></p>'+
-                        '<i style="background: #b30000; opacity: 0.5"></i><p><b>>38.12</b></p>';
+                    var counties_hcb_legend = '<p><b>Job Growth</b></p>' +
+                        '<i style="background: #fef0d9; opacity: 0.5"></i><p><b> < -19.57</b></p>' +
+                        '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>-19.58 - .96</b></p>' +
+                        '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>.97 - 8.74</b></p>' +
+                        '<i style="background: #e34a33; opacity: 0.5"></i><p><b>8.75 - 18.4</b></p>'+
+                        '<i style="background: #b30000; opacity: 0.5"></i><p><b>>18.4</b></p>';
 
                 //////////////////////////////////////////////////////////////////////////
 
@@ -402,10 +402,10 @@
 
     var scenes = {
         overview: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: 'Cover Page', layers: []},
-        totpop: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: 'Total Population', layers: [layers.counties_totpop]},
-        ruralpop: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: 'Rural Population', layers: [layers.counties_ruralpop]},
-        netmigrate: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: 'Net Migration', layers: [layers.counties_netmigrate]},
-        hcb: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: 'Housing Burden Cost', layers: [layers.counties_hcb]},
+        totpop: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: 'Median Income', layers: [layers.counties_totpop]},
+        ruralpop: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: 'Unemployment Rate', layers: [layers.counties_ruralpop]},
+        netmigrate: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: 'Labor Force Participation Rate', layers: [layers.counties_netmigrate]},
+        hcb: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: 'Job Growth', layers: [layers.counties_hcb]},
         end: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: 'The End'}
     };
 
