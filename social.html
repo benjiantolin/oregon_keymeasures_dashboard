@@ -288,7 +288,7 @@
         {
             style: style1,
             onEachFeature: function (feature, layer) {
-                layer.bindTooltip(feature.properties.NAME+"<br> Total Pop: "+ feature.properties.foodinsec+"%" , {className: 'feature-label', permanent: false, direction: 'center'});
+                layer.bindTooltip(feature.properties.NAME+"<br> Food Insecurity: "+ feature.properties.foodinsec+"%" , {className: 'feature-label', permanent: false, direction: 'center'});
             }
         });
 
