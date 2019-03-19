@@ -335,7 +335,7 @@
                 {
                     style: style3,
                     onEachFeature: function (feature, layer) {
-                        layer.bindTooltip(feature.properties.NAME+"<br> % 2 YR Degree: "+ (feature.properties.twoyrdeg).toFixed(2)+"%", {className: 'feature-label', permanent: false, direction: 'center'});
+                        layer.bindTooltip(feature.properties.NAME+"<br> % 2 YR Degree: "+ (feature.properties.twoyrdeg), {className: 'feature-label', permanent: false, direction: 'center'});
                     }
                 });
 
