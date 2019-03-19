@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Economic Measures</title>
+    <title>ObtC Economic Measures</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!--meta data for sharing links on Facebook-->
     <meta property="og:title" content="Oregon by the Counties"/>
-    <meta property="og:url" content="http://benjiantolin.github.io/obtcstorymap/index.html"/>
+    <meta property="og:url" content="http://benjiantolin.github.io/oregon_keymeasures_dashboard/index.html"/>
     <meta property="og:description" content="This is a storymap using sample measures from Oregon by the Numbers."/>
 
 
@@ -219,7 +219,7 @@
     // Set style function that sets fill color property equal to Total Population
     function style1(feature) {
         return {
-            fillColor: setColor1(feature.properties.Median_Inc),
+            fillColor: setColor1(feature.properties.medinc),
             fillOpacity: 0.5,
             weight: 2,
             opacity: 0.8,
@@ -232,7 +232,7 @@
         {
             style: style1,
             onEachFeature: function (feature, layer) {
-                layer.bindTooltip(feature.properties.altName+"<br> Median Income: $"+ feature.properties.Median_Inc , {className: 'feature-label', permanent: false, direction: 'center'});
+                layer.bindTooltip(feature.properties.NAME+"<br> Median Income: $"+ feature.properties.medinc , {className: 'feature-label', permanent: false, direction: 'center'});
             }
         });
 
@@ -263,7 +263,7 @@
         // Set style function that sets fill color property equal to percentage of rural population
         function style2(feature) {
             return {
-                fillColor: setColor2(feature.properties.Unemployme),
+                fillColor: setColor2(feature.properties.unemprate),
                 fillOpacity: 0.5,
                 weight: 2,
                 opacity: 0.8,
@@ -276,16 +276,16 @@
             {
                 style: style2,
                 onEachFeature: function (feature, layer) {
-                    layer.bindTooltip(feature.properties.altName+"<br> Unemployment Rate: "+ (feature.properties.Unemployme), {className: 'feature-label', permanent: false, direction: 'center'});
+                    layer.bindTooltip(feature.properties.altName+"<br> Unemployment Rate: "+ (feature.properties.unemprate)+"%", {className: 'feature-label', permanent: false, direction: 'center'});
                 }
             });
 
 
         var counties_ruralpop_legend = '<p><b>Unemployment Rate</b></p>' +
-            '<i style="background: #fef0d9; opacity: 0.5"></i><p><b>0% - 4.41%</b></p>' +
-            '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>5.11% - 5.90%</b></p>' +
-            '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>5.91% - 6.71%</b></p>' +
-            '<i style="background: #e34a33; opacity: 0.5"></i><p><b>> 6.71%</b></p>';
+            '<i style="background: #fef0d9; opacity: 0.5"></i><p><b>0-4.41</b></p>' +
+            '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>5.11%-5.9</b></p>' +
+            '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>5.91-6.71</b></p>' +
+            '<i style="background: #e34a33; opacity: 0.5"></i><p><b>>6.71</b></p>';
 
             //////////////////////////////////////////////////////////////////////////
             // Scene 4: LFPR
@@ -304,7 +304,7 @@
             // Set style function that sets fill color property equal to net migration
             function style3(feature) {
                 return {
-                    fillColor: setColor3(feature.properties.Labor_Forc),
+                    fillColor: setColor3(feature.properties.lfpr),
                     fillOpacity: 0.5,
                     weight: 2,
                     opacity: 0.8,
@@ -317,16 +317,16 @@
                 {
                     style: style3,
                     onEachFeature: function (feature, layer) {
-                        layer.bindTooltip(feature.properties.altName+"<br> Rate: "+ (feature.properties.Labor_Forc).toFixed(2), {className: 'feature-label', permanent: false, direction: 'center'});
+                        layer.bindTooltip(feature.properties.NAME+"<br> Rate: "+ (feature.properties.lfpr).toFixed(2), {className: 'feature-label', permanent: false, direction: 'center'});
                     }
                 });
 
 
             var counties_netmigrate_legend = '<p><b>Labor Force Particitpation Rate</b></p>' +
-                '<i style="background: #fef0d9; opacity: 0.5"></i><p><b>0 - 50.28</b></p>' +
-                '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>50.29 - 54.3</b></p>' +
-                '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>54.4 - 58.41</b></p>' +
-                '<i style="background: #e34a33; opacity: 0.5"></i><p><b>58.42 - 62.82</b></p>'+
+                '<i style="background: #fef0d9; opacity: 0.5"></i><p><b><50.28</b></p>' +
+                '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>50.29-54.3</b></p>' +
+                '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>54.4-58.41</b></p>' +
+                '<i style="background: #e34a33; opacity: 0.5"></i><p><b>58.42-62.82</b></p>'+
                 '<i style="background: #b30000; opacity: 0.5"></i><p><b>>62.82</b></p>';
 
                 // Scene 5: Job Growth
@@ -346,7 +346,7 @@
                     // Set style function that sets fill color property equal to the housing cost burden
                     function style4(feature) {
                         return {
-                            fillColor: setColor4(feature.properties.Job_Growth),
+                            fillColor: setColor4(feature.properties.jobgrowth),
                             fillOpacity: 0.5,
                             weight: 2,
                             opacity: 0.8,
@@ -359,7 +359,7 @@
                         {
                             style: style4,
                             onEachFeature: function (feature, layer) {
-                                layer.bindTooltip(feature.properties.altName+"<br> Housing Cost Burden: "+ (feature.properties.Job_Growth), {className: 'feature-label', permanent: false, direction: 'center'});
+                                layer.bindTooltip(feature.properties.NAME+"<br> Job Growth: "+ (feature.properties.jobgrowth), {className: 'feature-label', permanent: false, direction: 'center'});
                             }
                         });
 

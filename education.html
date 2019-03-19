@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Oregon by the Counties</title>
+    <title>ObtC Education Measures</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!--meta data for sharing links on Facebook-->
     <meta property="og:title" content="Oregon by the Counties"/>
-    <meta property="og:url" content="http://benjiantolin.github.io/obtcstorymap/index.html"/>
+    <meta property="og:url" content="http://benjiantolin.github.io/oregon_keymeasures_dashboard/index.html"/>
     <meta property="og:description" content="This is a storymap using sample measures from Oregon by the Numbers."/>
 
 
@@ -72,7 +72,7 @@
                     </h3>
                 </div>
             </section>
-            <section data-scene="totpop">
+            <section data-scene="earlyed">
               <h2>Early Education</h2>
               <h5><i><b>Definition:</b>The percentage of three- and four-year-olds enrolled in
                                        early education programs (nursery school or preschool), based on
@@ -87,7 +87,7 @@
                  and readers should use caution when interpreting these statistics.</i></p>
             </section>
 
-            <section data-scene="ruralpop">
+            <section data-scene="fouryrdeg">
               <h2>4-Year Degree or Greater</h2>
               <h5><i><b>Definition:</b>The percentage of the county population, age 25 or
                                        older, that has earned a four-year degree or greater educational
@@ -101,7 +101,7 @@
                  economic development.</p>
             </section>
 
-            <section data-scene="netmigrate">
+            <section data-scene="twoyrdeg">
               <h2>2-Year Degree</h2>
               <h5><i><b>Definition:</b>The percentage of a county’s population, age 25 or
                                        older, that has earned a two-year degree.</i></h5>
@@ -116,7 +116,7 @@
                  shortages of skilled labor and tradespeople.</p>
             </section>
 
-            <section data-scene="hcb">
+            <section data-scene="gradrate">
               <h2>High School Graduation Rate</h2>
               <h5><i><b>Definition:</b>The percentage of students in a high school cohort who
                                        graduate with a regular or modified diploma, or who have met all
@@ -236,7 +236,7 @@
     // Set style function that sets fill color property equal to Total Population
     function style1(feature) {
         return {
-            fillColor: setColor1(feature.properties.Total_Popu),
+            fillColor: setColor1(feature.properties.Early_Edu),
             fillOpacity: 0.5,
             weight: 2,
             opacity: 0.8,
@@ -245,21 +245,21 @@
         };
     }
 
-    var counties_totpop = L.geoJson.ajax('assets/counties.geojson',
+    var counties_earlyed = L.geoJson.ajax('assets/counties.geojson',
         {
             style: style1,
             onEachFeature: function (feature, layer) {
-                layer.bindTooltip(feature.properties.altName+"<br> Total Pop: "+ feature.properties.Total_Popu , {className: 'feature-label', permanent: false, direction: 'center'});
+                layer.bindTooltip(feature.properties.NAME+"<br> % Early Education: "+ feature.properties.Early_Edu.toFixed(2) + "%" , {className: 'feature-label', permanent: false, direction: 'center'});
             }
         });
 
 
-    var counties_totpop_legend = '<p><b>Total Population</b></p>' +
-        '<i style="background: #fef0d9; opacity: 0.5"></i><p><b>0 - 37,660</b></p>' +
-        '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>37,661 - 87,455</b></p>' +
-        '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>87,456 - 210,916</b></p>' +
-        '<i style="background: #e34a33; opacity: 0.5"></i><p><b>210,917 - 564,088</b></p>' +
-        '<i style="background: #b30000; opacity: 0.5"></i><p><b>>564,088</b></p>';
+    var counties_earlyed_legend = '<p><b>% Early Education</b></p>' +
+        '<i style="background: #fef0d9; opacity: 0.5"></i><p><b><24.01</b></p>' +
+        '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>24.02-37.03</b></p>' +
+        '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>37.04-43.43</b></p>' +
+        '<i style="background: #e34a33; opacity: 0.5"></i><p><b>43.44-49.24</b></p>' +
+        '<i style="background: #b30000; opacity: 0.5"></i><p><b>>49.24</b></p>';
 
 
 
@@ -280,7 +280,7 @@
         // Set style function that sets fill color property equal to percentage of rural population
         function style2(feature) {
             return {
-                fillColor: setColor2(feature.properties.Rural_Popu),
+                fillColor: setColor2(feature.properties.fouryrdeg),
                 fillOpacity: 0.5,
                 weight: 2,
                 opacity: 0.8,
@@ -289,20 +289,21 @@
             };
         }
 
-        var counties_ruralpop = L.geoJson.ajax('assets/counties.geojson',
+        var counties_fouryrdeg = L.geoJson.ajax('assets/counties.geojson',
             {
                 style: style2,
                 onEachFeature: function (feature, layer) {
-                    layer.bindTooltip(feature.properties.altName+"<br> Rural Pop: "+ (feature.properties.Rural_Popu).toFixed(2) + "%", {className: 'feature-label', permanent: false, direction: 'center'});
+                    layer.bindTooltip(feature.properties.NAME+"<br> % 4 YR Degree+: "+ (feature.properties.fouryrdeg).toFixed(2) + "%", {className: 'feature-label', permanent: false, direction: 'center'});
                 }
             });
 
 
-        var counties_ruralpop_legend = '<p><b>Rural Population</b></p>' +
-            '<i style="background: #fef0d9; opacity: 0.5"></i><p><b>0% - 25%</b></p>' +
-            '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>25.1% - 50%</b></p>' +
-            '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>50.1% - 75%</b></p>' +
-            '<i style="background: #e34a33; opacity: 0.5"></i><p><b>75.1% - 100%</b></p>';
+        var counties_fouryrdeg_legend = '<p><b>% 4 YR Degree+</b></p>' +
+        '<i style="background: #fef0d9; opacity: 0.5"></i><p><b><13.28</b></p>' +
+        '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>13.29-19.19</b></p>' +
+        '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>19.2-26.07</b></p>' +
+        '<i style="background: #e34a33; opacity: 0.5"></i><p><b>26.08-34.07</b></p>' +
+        '<i style="background: #b30000; opacity: 0.5"></i><p><b>>34.07</b></p>';
 
             //////////////////////////////////////////////////////////////////////////
             // Scene 4: 2 Year deg
@@ -321,7 +322,7 @@
             // Set style function that sets fill color property equal to net migration
             function style3(feature) {
                 return {
-                    fillColor: setColor3(feature.properties.Migration),
+                    fillColor: setColor3(feature.properties.twoyrdeg),
                     fillOpacity: 0.5,
                     weight: 2,
                     opacity: 0.8,
@@ -330,21 +331,21 @@
                 };
             }
 
-            var counties_netmigrate = L.geoJson.ajax('assets/counties.geojson',
+            var counties_twoyrdeg = L.geoJson.ajax('assets/counties.geojson',
                 {
                     style: style3,
                     onEachFeature: function (feature, layer) {
-                        layer.bindTooltip(feature.properties.altName+"<br> Net Migration: "+ (feature.properties.Migration).toFixed(2), {className: 'feature-label', permanent: false, direction: 'center'});
+                        layer.bindTooltip(feature.properties.NAME+"<br> % 2 YR Degree: "+ (feature.properties.twoyrdeg).toFixed(2)+"%", {className: 'feature-label', permanent: false, direction: 'center'});
                     }
                 });
 
 
-            var counties_netmigrate_legend = '<p><b>Net Migration</b></p>' +
-                '<i style="background: #fef0d9; opacity: 0.5"></i><p><b>-7.18 - -2.93</b></p>' +
-                '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>-2.92 - 3.19</b></p>' +
-                '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>3.20 - 7.77</b></p>' +
-                '<i style="background: #e34a33; opacity: 0.5"></i><p><b>7.78 - 12.92</b></p>'+
-                '<i style="background: #b30000; opacity: 0.5"></i><p><b>>12.93</b></p>';
+            var counties_twoyrdeg_legend = '<p><b>% 2 YR Degree</b></p>' +
+                '<i style="background: #fef0d9; opacity: 0.5"></i><p><b><7.46</b></p>' +
+                '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>7.47-8.45</b></p>' +
+                '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>8.46-8.99</b></p>' +
+                '<i style="background: #e34a33; opacity: 0.5"></i><p><b>9-9.66</b></p>'+
+                '<i style="background: #b30000; opacity: 0.5"></i><p><b>>9.66</b></p>';
 
                 // Scene 5: High School Grad Rate
 
@@ -363,7 +364,7 @@
                     // Set style function that sets fill color property equal to the housing cost burden
                     function style4(feature) {
                         return {
-                            fillColor: setColor4(feature.properties.Housing_Co),
+                            fillColor: setColor4(feature.properties.gradrate),
                             fillOpacity: 0.5,
                             weight: 2,
                             opacity: 0.8,
@@ -372,21 +373,21 @@
                         };
                     }
 
-                    var counties_hcb = L.geoJson.ajax('assets/counties.geojson',
+                    var counties_gradrate = L.geoJson.ajax('assets/counties.geojson',
                         {
                             style: style4,
                             onEachFeature: function (feature, layer) {
-                                layer.bindTooltip(feature.properties.altName+"<br> Housing Cost Burden: "+ (feature.properties.Housing_Co).toFixed(2)+ "%", {className: 'feature-label', permanent: false, direction: 'center'});
+                                layer.bindTooltip(feature.properties.NAME+"<br> HS Grad Rate: "+ (feature.properties.gradrate).toFixed(2)+ "%", {className: 'feature-label', permanent: false, direction: 'center'});
                             }
                         });
 
 
-                    var counties_hcb_legend = '<p><b>Housing Cost Burden</b></p>' +
-                        '<i style="background: #fef0d9; opacity: 0.5"></i><p><b>23.02 - 26.77</b></p>' +
-                        '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>26.78 - 31.16</b></p>' +
-                        '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>31.17 - 34.55</b></p>' +
-                        '<i style="background: #e34a33; opacity: 0.5"></i><p><b>34.56 - 38.11</b></p>'+
-                        '<i style="background: #b30000; opacity: 0.5"></i><p><b>>38.12</b></p>';
+                    var counties_gradrate_legend = '<p><b>HS Grad Rate</b></p>' +
+                        '<i style="background: #fef0d9; opacity: 0.5"></i><p><b><18.11</b></p>' +
+                        '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>18.12-63.51</b></p>' +
+                        '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>63.52-76.19</b></p>' +
+                        '<i style="background: #e34a33; opacity: 0.5"></i><p><b>76.2-84.48</b></p>'+
+                        '<i style="background: #b30000; opacity: 0.5"></i><p><b>>84.48</b></p>';
 
                 //////////////////////////////////////////////////////////////////////////
 
@@ -407,7 +408,7 @@
                     // Set style function that sets fill color property equal to the housing cost burden
                     function style5(feature) {
                         return {
-                            fillColor: setColor5(feature.properties.Housing_Co),
+                            fillColor: setColor5(feature.properties.highered),
                             fillOpacity: 0.5,
                             weight: 2,
                             opacity: 0.8,
@@ -416,56 +417,53 @@
                         };
                     }
 
-                    var counties_hcb = L.geoJson.ajax('assets/counties.geojson',
+                    var counties_highered = L.geoJson.ajax('assets/counties.geojson',
                         {
                             style: style5,
                             onEachFeature: function (feature, layer) {
-                                layer.bindTooltip(feature.properties.altName+"<br> Housing Cost Burden: "+ (feature.properties.Housing_Co).toFixed(2)+ "%", {className: 'feature-label', permanent: false, direction: 'center'});
+                                layer.bindTooltip(feature.properties.NAME+"<br> Higher Ed Enrollment: "+ (feature.properties.highered).toFixed(2), {className: 'feature-label', permanent: false, direction: 'center'});
                             }
                         });
 
 
-                    var counties_hcb_legend = '<p><b>Housing Cost Burden</b></p>' +
-                        '<i style="background: #fef0d9; opacity: 0.5"></i><p><b>23.02 - 26.77</b></p>' +
-                        '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>26.78 - 31.16</b></p>' +
-                        '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>31.17 - 34.55</b></p>' +
-                        '<i style="background: #e34a33; opacity: 0.5"></i><p><b>34.56 - 38.11</b></p>'+
-                        '<i style="background: #b30000; opacity: 0.5"></i><p><b>>38.12</b></p>';
+                    var counties_highered_legend = '<p><b>Higher Ed Enrollment</b></p>' +
+                        '<i style="background: #fef0d9; opacity: 0.5"></i><p><b><10.22</b></p>' +
+                        '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>10.23-40.01</b></p>' +
+                        '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>40.02-68.6</b></p>' +
+                        '<i style="background: #e34a33; opacity: 0.5"></i><p><b>68.7-123.31</b></p>'+
+                        '<i style="background: #b30000; opacity: 0.5"></i><p><b>>123.31</b></p>';
 
                 //////////////////////////////////////////////////////////////////////////
 
     var layers = {
-        ESRI: {layer: L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}')},
-        counties_totpop: {
-            layer: counties_totpop, legend: counties_totpop_legend
-        },
-        counties_ruralpop: {
-            layer: counties_ruralpop, legend: counties_ruralpop_legend
-        },
-        counties_netmigrate: {
-            layer: counties_netmigrate, legend: counties_netmigrate_legend
-        },
-        counties_hcb: {
-            layer: counties_hcb, legend: counties_hcb_legend
-        },
-        GEE: {
-            layer: L.tileLayer('http://earthengine.google.org/static/hansen_2013/tree_alpha/{z}/{x}/{y}.png'),
 
+        counties_earlyed: {
+            layer: counties_earlyed, legend: counties_earlyed_legend
         },
-        satellite: {
-            layer: L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiamFrb2J6aGFvIiwiYSI6ImNpcms2YWsyMzAwMmtmbG5icTFxZ3ZkdncifQ.P9MBej1xacybKcDN_jehvw', {
-                id: 'mapbox.satellite'
-            })
+        counties_fouryrdeg: {
+            layer: counties_fouryrdeg, legend: counties_fouryrdeg_legend
         },
+        counties_twoyrdeg: {
+            layer: counties_twoyrdeg, legend: counties_twoyrdeg_legend
+        },
+        counties_gradrate: {
+            layer: counties_gradrate, legend: counties_gradrate_legend
+        },
+        counties_highered: {
+            layer: counties_highered, legend: counties_highered_legend
+        },
+
+
         cartodb_light: {layer: L.tileLayer('http://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}@2x.png')}
     };
 
     var scenes = {
         overview: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: 'Cover Page', layers: []},
-        totpop: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: 'Total Population', layers: [layers.counties_totpop]},
-        ruralpop: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: 'Rural Population', layers: [layers.counties_ruralpop]},
-        netmigrate: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: 'Net Migration', layers: [layers.counties_netmigrate]},
-        hcb: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: 'Housing Burden Cost', layers: [layers.counties_hcb]},
+        earlyed: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: 'Early Education', layers: [layers.counties_earlyed]},
+        fouryrdeg: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: '4 YR Degree+', layers: [layers.counties_fouryrdeg]},
+        twoyrdeg: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: '2 YR Degree', layers: [layers.counties_twoyrdeg]},
+        gradrate: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: 'HS Grad Rate', layers: [layers.counties_gradrate]},
+        highered: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: 'Higher Ed Enrollment', layers: [layers.counties_highered]},
         end: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: 'The End'}
     };
 

@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Oregon by the Counties</title>
+    <title>ObtC Health Measures</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!--meta data for sharing links on Facebook-->
     <meta property="og:title" content="Oregon by the Counties"/>
-    <meta property="og:url" content="http://benjiantolin.github.io/obtcstorymap/index.html"/>
+    <meta property="og:url" content="http://benjiantolin.github.io/oregon_keymeasures_dashboard/index.html"/>
     <meta property="og:description" content="This is a storymap using sample measures from Oregon by the Numbers."/>
 
 
@@ -72,7 +72,7 @@
                     </h3>
                 </div>
             </section>
-            <section data-scene="totpop">
+            <section data-scene="paa">
               <h2>Physically Active Adults</h2>
               <h5><i><b>Definition:</b>The percentage of adults who report meeting the
                                        guidelines for physical activity provided by the Centers for Disease
@@ -90,7 +90,7 @@
                  multiple generations.</p>
             </section>
 
-            <section data-scene="ruralpop">
+            <section data-scene="smoking">
               <h2>Adult Smoking</h2>
               <h5><i><b>Definition:</b>The percentage of adults who report that they currently
                                        smoke cigarettes. </i></h5>
@@ -100,7 +100,7 @@
                  for smokers themselves as well as their family members. </p>
             </section>
 
-            <section data-scene="netmigrate">
+            <section data-scene="healthydiet">
               <h2>Healthy Diet</h2>
               <h5><i><b>Definition:</b>The percentage of adults who report eating the
                                        recommended amounts of fruits and vegetables, meaning five or
@@ -112,7 +112,7 @@
                  Good nutrition is also associated with mental health benefits. </p>
             </section>
 
-            <section data-scene="hcb">
+            <section data-scene="vaxrate">
               <h2>Vaccination Rate, Two-Year-Olds</h2>
               <h5><i><b>Definition:</b>The percentage of two-year-olds in a given year
                                        who have received their required immunizations – rates of 95%
@@ -129,7 +129,7 @@
                  compared to vaccination costs.</p>
             </section>
 
-            <section data-scene="lowweight">
+            <section data-scene="lowbirthra">
               <h2>Low Weight Births</h2>
               <h5><i><b>Definition:</b>The percentage of live babies who weigh less than
                                        2,500 grams (5.5 lbs) at birth.</i> </h5>
@@ -222,7 +222,7 @@
     // Set style function that sets fill color property equal to Total Population
     function style1(feature) {
         return {
-            fillColor: setColor1(feature.properties.Total_Popu),
+            fillColor: setColor1(feature.properties.paa),
             fillOpacity: 0.5,
             weight: 2,
             opacity: 0.8,
@@ -231,26 +231,26 @@
         };
     }
 
-    var counties_totpop = L.geoJson.ajax('assets/counties.geojson',
+    var counties_paa = L.geoJson.ajax('assets/counties.geojson',
         {
             style: style1,
             onEachFeature: function (feature, layer) {
-                layer.bindTooltip(feature.properties.altName+"<br> Total Pop: "+ feature.properties.Total_Popu , {className: 'feature-label', permanent: false, direction: 'center'});
+                layer.bindTooltip(feature.properties.NAME+"<br> Physically Active Adults (%): "+ feature.properties.paa.toFixed(2) + "%" , {className: 'feature-label', permanent: false, direction: 'center'});
             }
         });
 
 
-    var counties_totpop_legend = '<p><b>Total Population</b></p>' +
-        '<i style="background: #fef0d9; opacity: 0.5"></i><p><b>0 - 37,660</b></p>' +
-        '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>37,661 - 87,455</b></p>' +
-        '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>87,456 - 210,916</b></p>' +
-        '<i style="background: #e34a33; opacity: 0.5"></i><p><b>210,917 - 564,088</b></p>' +
-        '<i style="background: #b30000; opacity: 0.5"></i><p><b>>564,088</b></p>';
+    var counties_paa_legend = '<p><b>Physically Active Adults (%)</b></p>' +
+        '<i style="background: #fef0d9; opacity: 0.5"></i><p><b><6.21</b></p>' +
+        '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>6.22-17.61</b></p>' +
+        '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>17.62-25.91</b></p>' +
+        '<i style="background: #e34a33; opacity: 0.5"></i><p><b>25.91-32.01</b></p>' +
+        '<i style="background: #b30000; opacity: 0.5"></i><p><b>>32.01</b></p>';
 
 
 
         //////////////////////////////////////////////////////////////////////////
-        // Scene 3: Healthy Diet
+        // Scene 3: Adult Smoking
 
         // Set function for color ramp
         function setColor2(density){
@@ -266,7 +266,7 @@
         // Set style function that sets fill color property equal to percentage of rural population
         function style2(feature) {
             return {
-                fillColor: setColor2(feature.properties.Rural_Popu),
+                fillColor: setColor2(feature.properties.smoking),
                 fillOpacity: 0.5,
                 weight: 2,
                 opacity: 0.8,
@@ -275,20 +275,21 @@
             };
         }
 
-        var counties_ruralpop = L.geoJson.ajax('assets/counties.geojson',
+        var counties_smoking = L.geoJson.ajax('assets/counties.geojson',
             {
                 style: style2,
                 onEachFeature: function (feature, layer) {
-                    layer.bindTooltip(feature.properties.altName+"<br> Rural Pop: "+ (feature.properties.Rural_Popu).toFixed(2) + "%", {className: 'feature-label', permanent: false, direction: 'center'});
+                    layer.bindTooltip(feature.properties.NAME+"<br>Adults Smoking: "+ (feature.properties.smoking).toFixed(2) + "%", {className: 'feature-label', permanent: false, direction: 'center'});
                 }
             });
 
 
-        var counties_ruralpop_legend = '<p><b>Rural Population</b></p>' +
-            '<i style="background: #fef0d9; opacity: 0.5"></i><p><b>0% - 25%</b></p>' +
-            '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>25.1% - 50%</b></p>' +
-            '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>50.1% - 75%</b></p>' +
-            '<i style="background: #e34a33; opacity: 0.5"></i><p><b>75.1% - 100%</b></p>';
+        var counties_smoking_legend = '<p><b>% Adults Smoking</b></p>' +
+        '<i style="background: #fef0d9; opacity: 0.5"></i><p><b><5.91</b></p>' +
+        '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>5.92-14.61</b></p>' +
+        '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>14.62-22.61</b></p>' +
+        '<i style="background: #e34a33; opacity: 0.5"></i><p><b>22.62-30.91</b></p>' +
+        '<i style="background: #b30000; opacity: 0.5"></i><p><b>>30.91</b></p>';
 
             //////////////////////////////////////////////////////////////////////////
             // Scene 4: Vaccination 2 year olds
@@ -307,7 +308,7 @@
             // Set style function that sets fill color property equal to net migration
             function style3(feature) {
                 return {
-                    fillColor: setColor3(feature.properties.Migration),
+                    fillColor: setColor3(feature.properties.vaxrate),
                     fillOpacity: 0.5,
                     weight: 2,
                     opacity: 0.8,
@@ -316,21 +317,21 @@
                 };
             }
 
-            var counties_netmigrate = L.geoJson.ajax('assets/counties.geojson',
+            var counties_vaxrate = L.geoJson.ajax('assets/counties.geojson',
                 {
                     style: style3,
                     onEachFeature: function (feature, layer) {
-                        layer.bindTooltip(feature.properties.altName+"<br> Net Migration: "+ (feature.properties.Migration).toFixed(2), {className: 'feature-label', permanent: false, direction: 'center'});
+                        layer.bindTooltip(feature.properties.NAME+"<br> Vax Rate: "+ (feature.properties.vaxrate) + "%", {className: 'feature-label', permanent: false, direction: 'center'});
                     }
                 });
 
 
-            var counties_netmigrate_legend = '<p><b>Net Migration</b></p>' +
-                '<i style="background: #fef0d9; opacity: 0.5"></i><p><b>-7.18 - -2.93</b></p>' +
-                '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>-2.92 - 3.19</b></p>' +
-                '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>3.20 - 7.77</b></p>' +
-                '<i style="background: #e34a33; opacity: 0.5"></i><p><b>7.78 - 12.92</b></p>'+
-                '<i style="background: #b30000; opacity: 0.5"></i><p><b>>12.93</b></p>';
+            var counties_vaxrate_legend = '<p><b>Vax Rate (%)</b></p>' +
+                '<i style="background: #fef0d9; opacity: 0.5"></i><p><b><0.01</b></p>' +
+                '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>0.01-51</b></p>' +
+                '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>51.01-67</b></p>' +
+                '<i style="background: #e34a33; opacity: 0.5"></i><p><b>67.01-73</b></p>'+
+                '<i style="background: #b30000; opacity: 0.5"></i><p><b>>73</b></p>';
 
                 // Scene 5: Low Birth weight
 
@@ -349,7 +350,7 @@
                     // Set style function that sets fill color property equal to the housing cost burden
                     function style4(feature) {
                         return {
-                            fillColor: setColor4(feature.properties.Housing_Co),
+                            fillColor: setColor4(feature.properties.lowbirthra),
                             fillOpacity: 0.5,
                             weight: 2,
                             opacity: 0.8,
@@ -358,16 +359,16 @@
                         };
                     }
 
-                    var counties_hcb = L.geoJson.ajax('assets/counties.geojson',
+                    var counties_lowbirthra = L.geoJson.ajax('assets/counties.geojson',
                         {
                             style: style4,
                             onEachFeature: function (feature, layer) {
-                                layer.bindTooltip(feature.properties.altName+"<br> Housing Cost Burden: "+ (feature.properties.Housing_Co).toFixed(2)+ "%", {className: 'feature-label', permanent: false, direction: 'center'});
+                                layer.bindTooltip(feature.properties.NAME+"<br> Low Birth Weight: "+ (feature.properties.lowbirthra).toFixed(2)+ "%", {className: 'feature-label', permanent: false, direction: 'center'});
                             }
                         });
 
 
-                    var counties_hcb_legend = '<p><b>Housing Cost Burden</b></p>' +
+                    var counties_lowbirthra_legend = '<p><b>Low Birth Weight (%)</b></p>' +
                         '<i style="background: #fef0d9; opacity: 0.5"></i><p><b>23.02 - 26.77</b></p>' +
                         '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>26.78 - 31.16</b></p>' +
                         '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>31.17 - 34.55</b></p>' +
@@ -376,39 +377,80 @@
 
                 //////////////////////////////////////////////////////////////////////////
 
+                // Scene 6: Healthy Diet
+
+
+                    // Set function for color ramp
+                    function setColor4(density){
+                        //Tenary operation: condition ? valueIfTrue : valueIfFalse
+                        // condition ? value1 : value2
+                        return  density > 30.9 ? '#b30000' :
+                                density > 21.8 ? '#e34a33' :
+                                density > 14.6 ? '#fc8d59' :
+                                density > 5.9 ? '#fdcc8a' :
+                                '#fef0d9';
+                    }
+
+                    // Set style function that sets fill color property equal to the housing cost burden
+                    function style4(feature) {
+                        return {
+                            fillColor: setColor4(feature.properties.heathydiet),
+                            fillOpacity: 0.5,
+                            weight: 2,
+                            opacity: 0.8,
+                            color: '#605f5f',
+                            dashArray: '4'
+                        };
+                    }
+
+                    var counties_healthydiet = L.geoJson.ajax('assets/counties.geojson',
+                        {
+                            style: style4,
+                            onEachFeature: function (feature, layer) {
+                                layer.bindTooltip(feature.properties.NAME+"<br>Healthy Diet: "+ (feature.properties.heathydiet).toFixed(2)+ "%", {className: 'feature-label', permanent: false, direction: 'center'});
+                            }
+                        });
+
+
+                    var counties_healthydiet_legend = '<p><b>% Healthy Diet</b></p>' +
+                        '<i style="background: #fef0d9; opacity: 0.5"></i><p><b><5.9</b></p>' +
+                        '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>6-14.6</b></p>' +
+                        '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>14.7-21.8</b></p>' +
+                        '<i style="background: #e34a33; opacity: 0.5"></i><p><b>21.9-30.9</b></p>'+
+                        '<i style="background: #b30000; opacity: 0.5"></i><p><b>>30.9</b></p>';
+
+                //////////////////////////////////////////////////////////////////////////
+
 
     var layers = {
-        ESRI: {layer: L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}')},
-        counties_totpop: {
-            layer: counties_totpop, legend: counties_totpop_legend
-        },
-        counties_ruralpop: {
-            layer: counties_ruralpop, legend: counties_ruralpop_legend
-        },
-        counties_netmigrate: {
-            layer: counties_netmigrate, legend: counties_netmigrate_legend
-        },
-        counties_hcb: {
-            layer: counties_hcb, legend: counties_hcb_legend
-        },
-        GEE: {
-            layer: L.tileLayer('http://earthengine.google.org/static/hansen_2013/tree_alpha/{z}/{x}/{y}.png'),
 
+        counties_paa: {
+            layer: counties_paa, legend: counties_paa_legend
         },
-        satellite: {
-            layer: L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiamFrb2J6aGFvIiwiYSI6ImNpcms2YWsyMzAwMmtmbG5icTFxZ3ZkdncifQ.P9MBej1xacybKcDN_jehvw', {
-                id: 'mapbox.satellite'
-            })
+        counties_smoking: {
+            layer: counties_smoking, legend: counties_smoking_legend
         },
+        counties_healthydiet: {
+            layer: counties_healthydiet, legend: counties_healthydiet_legend
+        },
+        counties_vaxrate: {
+            layer: counties_vaxrate, legend: counties_vaxrate_legend
+        },
+
+        counties_lowbirthra: {
+            layer: counties_lowbirthra, legend: counties_lowbirthra_legend
+        },
+
         cartodb_light: {layer: L.tileLayer('http://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}@2x.png')}
     };
 
     var scenes = {
         overview: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: 'Cover Page', layers: []},
-        totpop: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: 'Total Population', layers: [layers.counties_totpop]},
-        ruralpop: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: 'Rural Population', layers: [layers.counties_ruralpop]},
-        netmigrate: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: 'Net Migration', layers: [layers.counties_netmigrate]},
-        hcb: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: 'Housing Burden Cost', layers: [layers.counties_hcb]},
+        paa: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: 'Physically Active Adults', layers: [layers.counties_paa]},
+        smoking: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: 'Adults Smoking', layers: [layers.counties_smoking]},
+        healthydiet: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: '% Healthy Diet', layers: [layers.counties_healthydiet]},
+        vaxrate: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: 'Vaccination Rate', layers: [layers.counties_vaxrate]},
+        lowbirthra: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: 'Low Birth weight', layers: [layers.counties_lowbirthra]},
         end: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: 'The End'}
     };
 

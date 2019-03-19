@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Demographic Measures</title>
+    <title>ObtC Demographic Measures</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!--meta data for sharing links on Facebook-->
     <meta property="og:title" content="Oregon by the Counties"/>
-    <meta property="og:url" content="http://benjiantolin.github.io/obtcstorymap/index.html"/>
+    <meta property="og:url" content="http://benjiantolin.github.io/oregon_keymeasures_dashboard/index.html"/>
     <meta property="og:description" content="This is a storymap using sample measures from Oregon by the Numbers."/>
 
 
@@ -195,7 +195,7 @@
     // Set style function that sets fill color property equal to Total Population
     function style1(feature) {
         return {
-            fillColor: setColor1(feature.properties.Total_Popu),
+            fillColor: setColor1(feature.properties.totpop),
             fillOpacity: 0.5,
             weight: 2,
             opacity: 0.8,
@@ -208,16 +208,16 @@
         {
             style: style1,
             onEachFeature: function (feature, layer) {
-                layer.bindTooltip(feature.properties.altName+"<br> Total Pop: "+ feature.properties.Total_Popu , {className: 'feature-label', permanent: false, direction: 'center'});
+                layer.bindTooltip(feature.properties.NAME+"<br> Total Pop: "+ feature.properties.totpop , {className: 'feature-label', permanent: false, direction: 'center'});
             }
         });
 
 
     var counties_totpop_legend = '<p><b>Total Population</b></p>' +
-        '<i style="background: #fef0d9; opacity: 0.5"></i><p><b>0 - 37,660</b></p>' +
-        '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>37,661 - 87,455</b></p>' +
-        '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>87,456 - 210,916</b></p>' +
-        '<i style="background: #e34a33; opacity: 0.5"></i><p><b>210,917 - 564,088</b></p>' +
+        '<i style="background: #fef0d9; opacity: 0.5"></i><p><b><37,660</b></p>' +
+        '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>37,661-87,455</b></p>' +
+        '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>87,456-210,916</b></p>' +
+        '<i style="background: #e34a33; opacity: 0.5"></i><p><b>210,917-564,088</b></p>' +
         '<i style="background: #b30000; opacity: 0.5"></i><p><b>>564,088</b></p>';
 
 
@@ -239,7 +239,7 @@
         // Set style function that sets fill color property equal to percentage of rural population
         function style2(feature) {
             return {
-                fillColor: setColor2(feature.properties.Rural_Popu),
+                fillColor: setColor2(feature.properties.ruralpop),
                 fillOpacity: 0.5,
                 weight: 2,
                 opacity: 0.8,
@@ -252,16 +252,16 @@
             {
                 style: style2,
                 onEachFeature: function (feature, layer) {
-                    layer.bindTooltip(feature.properties.altName+"<br> Rural Pop: "+ (feature.properties.Rural_Popu).toFixed(2) + "%", {className: 'feature-label', permanent: false, direction: 'center'});
+                    layer.bindTooltip(feature.properties.NAME+"<br> Rural Pop: "+ (feature.properties.ruralpop).toFixed(2) + "%", {className: 'feature-label', permanent: false, direction: 'center'});
                 }
             });
 
 
-        var counties_ruralpop_legend = '<p><b>Rural Population</b></p>' +
-            '<i style="background: #fef0d9; opacity: 0.5"></i><p><b>0% - 25%</b></p>' +
-            '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>25.1% - 50%</b></p>' +
-            '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>50.1% - 75%</b></p>' +
-            '<i style="background: #e34a33; opacity: 0.5"></i><p><b>75.1% - 100%</b></p>';
+        var counties_ruralpop_legend = '<p><b>% Rural Population</b></p>' +
+            '<i style="background: #fef0d9; opacity: 0.5"></i><p><b><31.65</b></p>' +
+            '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>31.66-52.18</b></p>' +
+            '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>52.19-69.6</b></p>' +
+            '<i style="background: #e34a33; opacity: 0.5"></i><p><b>>69.61</b></p>';
 
             //////////////////////////////////////////////////////////////////////////
             // Scene 4: Net Migration
@@ -293,7 +293,7 @@
                 {
                     style: style3,
                     onEachFeature: function (feature, layer) {
-                        layer.bindTooltip(feature.properties.altName+"<br> Net Migration: "+ (feature.properties.Migration).toFixed(2), {className: 'feature-label', permanent: false, direction: 'center'});
+                        layer.bindTooltip(feature.properties.NAME+"<br> Net Migration: "+ (feature.properties.Migration).toFixed(2), {className: 'feature-label', permanent: false, direction: 'center'});
                     }
                 });
 
@@ -309,7 +309,7 @@
 
 
     var layers = {
-        ESRI: {layer: L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}')},
+
         counties_totpop: {
             layer: counties_totpop, legend: counties_totpop_legend
         },
@@ -319,15 +319,7 @@
         counties_netmigrate: {
             layer: counties_netmigrate, legend: counties_netmigrate_legend
         },
-        GEE: {
-            layer: L.tileLayer('http://earthengine.google.org/static/hansen_2013/tree_alpha/{z}/{x}/{y}.png'),
 
-        },
-        satellite: {
-            layer: L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiamFrb2J6aGFvIiwiYSI6ImNpcms2YWsyMzAwMmtmbG5icTFxZ3ZkdncifQ.P9MBej1xacybKcDN_jehvw', {
-                id: 'mapbox.satellite'
-            })
-        },
         cartodb_light: {layer: L.tileLayer('http://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}@2x.png')}
     };
 
