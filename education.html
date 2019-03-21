@@ -40,6 +40,9 @@
     <!--leaflet.ajax for asynchronously adding geojson data-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
 
+    <!--chroma.js-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/1.3.4/chroma.min.js"></script>
+
     <!--mini globle map-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.19/topojson.min.js"></script>
@@ -220,19 +223,21 @@
 <!-- main javascript -->
 <script type="text/javascript">
 
+var colors = chroma.scale('Purples').colors(5);
     //////////////////////////////////////////////////////////////////////////
     // Scene 2: Early education
     // Set function for color ramp
     function setColor1(density){
         //Tenary operation: condition ? valueIfTrue : valueIfFalse
         // condition ? value1 : value2
-        return  density > 49.24 ? '#b30000' :
-                density > 43.43 ? '#e34a33' :
-                density > 37.03 ? '#fc8d59' :
-                density > 24.01 ? '#fdcc8a' :
-                '#fef0d9';
+        var id = 0;
+        if (density > 49.24) { id = 4; }
+        else if (density > 43.44 && density <= 49.24) { id = 3; }
+        else if (density > 37.04 &&  density <= 43.44) { id = 2; }
+        else if (density > 24.02 && density <= 37.04) { id = 1; }
+        else  { id = 0; }
+        return colors[id];
     }
-
     // Set style function that sets fill color property equal to Total Population
     function style1(feature) {
         return {
@@ -255,11 +260,11 @@
 
 
     var counties_earlyed_legend = '<p><b>% Early Education</b></p>' +
-        '<i style="background: #fef0d9; opacity: 0.5"></i><p><b><24.01</b></p>' +
-        '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>24.02-37.03</b></p>' +
-        '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>37.04-43.43</b></p>' +
-        '<i style="background: #e34a33; opacity: 0.5"></i><p><b>43.44-49.24</b></p>' +
-        '<i style="background: #b30000; opacity: 0.5"></i><p><b>>49.24</b></p>';
+        '<i style="background: ' + colors[4] + '; opacity: 0.5"></i><p><b>>49.24</b></p>' +
+        '<i style="background: ' + colors[3] + '; opacity: 0.5"></i><p><b>43.44-49.24</b></p>' +
+        '<i style="background: ' + colors[2] + '; opacity: 0.5"></i><p><b>37.04-43.43</b></p>' +
+        '<i style="background: ' + colors[1] + '; opacity: 0.5"></i><p><b>24.02-37.03</b></p>' +
+        '<i style="background: ' + colors[0] + '; opacity: 0.5"></i><p><b><24.01</b></p>';
 
 
 
@@ -270,13 +275,14 @@
         function setColor2(density){
             //Tenary operation: condition ? valueIfTrue : valueIfFalse
             // condition ? value1 : value2
-            return  density > 34.07 ? '#b30000' :
-                    density > 26.07 ? '#e34a33' :
-                    density > 19.19 ? '#fc8d59' :
-                    density > 13.28 ? '#fdcc8a' :
-                    '#fef0d9';
+            var id = 0;
+            if (density > 34.07) { id = 4; }
+            else if (density > 26.08 && density <= 34.07) { id = 3; }
+            else if (density > 19.2 &&  density <= 26.08) { id = 2; }
+            else if (density > 13.29 && density <= 19.2) { id = 1; }
+            else  { id = 0; }
+            return colors[id];
         }
-
         // Set style function that sets fill color property equal to percentage of rural population
         function style2(feature) {
             return {
@@ -293,17 +299,17 @@
             {
                 style: style2,
                 onEachFeature: function (feature, layer) {
-                    layer.bindTooltip(feature.properties.NAME+"<br> % 4 YR Degree+: "+ (feature.properties.fouryrdeg).toFixed(2) + "%", {className: 'feature-label', permanent: false, direction: 'center'});
+                    layer.bindTooltip(feature.properties.NAME+"<br>4 YR Degree+: "+ (feature.properties.fouryrdeg).toFixed(2) + "%", {className: 'feature-label', permanent: false, direction: 'center'});
                 }
             });
 
 
         var counties_fouryrdeg_legend = '<p><b>% 4 YR Degree+</b></p>' +
-        '<i style="background: #fef0d9; opacity: 0.5"></i><p><b><13.28</b></p>' +
-        '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>13.29-19.19</b></p>' +
-        '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>19.2-26.07</b></p>' +
-        '<i style="background: #e34a33; opacity: 0.5"></i><p><b>26.08-34.07</b></p>' +
-        '<i style="background: #b30000; opacity: 0.5"></i><p><b>>34.07</b></p>';
+        '<i style="background: ' + colors[4] + '; opacity: 0.5"></i><p><b>>34.07</b></p>' +
+        '<i style="background: ' + colors[3] + '; opacity: 0.5"></i><p><b>26.08-34.07</b></p>' +
+        '<i style="background: ' + colors[2] + '; opacity: 0.5"></i><p><b>19.2-26.07</b></p>' +
+        '<i style="background: ' + colors[1] + '; opacity: 0.5"></i><p><b>13.29-19.19</b></p>' +
+        '<i style="background: ' + colors[0] + '; opacity: 0.5"></i><p><b><13.28</b></p>';
 
             //////////////////////////////////////////////////////////////////////////
             // Scene 4: 2 Year deg
@@ -312,11 +318,13 @@
             function setColor3(density){
                 //Tenary operation: condition ? valueIfTrue : valueIfFalse
                 // condition ? value1 : value2
-                return  density > 9.66 ? '#b30000' :
-                        density > 8.99 ? '#e34a33' :
-                        density > 8.45 ? '#fc8d59' :
-                        density > 7.46 ? '#fdcc8a' :
-                        '#fef0d9';
+                var id = 0;
+                if (density > 9.66) { id = 4; }
+                else if (density > 9 && density <= 9.66) { id = 3; }
+                else if (density > 8.46 &&  density <= 9) { id = 2; }
+                else if (density > 7.47 && density <= 8.46) { id = 1; }
+                else  { id = 0; }
+                return colors[id];
             }
 
             // Set style function that sets fill color property equal to net migration
@@ -335,17 +343,17 @@
                 {
                     style: style3,
                     onEachFeature: function (feature, layer) {
-                        layer.bindTooltip(feature.properties.NAME+"<br> % 2 YR Degree: "+ (feature.properties.twoyrdeg), {className: 'feature-label', permanent: false, direction: 'center'});
+                        layer.bindTooltip(feature.properties.NAME+"<br>2 YR Degree: "+ (feature.properties.twoyrdeg).toFixed(2) + "%", {className: 'feature-label', permanent: false, direction: 'center'});
                     }
                 });
 
 
             var counties_twoyrdeg_legend = '<p><b>% 2 YR Degree</b></p>' +
-                '<i style="background: #fef0d9; opacity: 0.5"></i><p><b><7.46</b></p>' +
-                '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>7.47-8.45</b></p>' +
-                '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>8.46-8.99</b></p>' +
-                '<i style="background: #e34a33; opacity: 0.5"></i><p><b>9-9.66</b></p>'+
-                '<i style="background: #b30000; opacity: 0.5"></i><p><b>>9.66</b></p>';
+                '<i style="background: ' + colors[4] + '; opacity: 0.5"></i><p><b>>9.66</b></p>' +
+                '<i style="background: ' + colors[3] + '; opacity: 0.5"></i><p><b>9-9.66</b></p>' +
+                '<i style="background: ' + colors[2] + '; opacity: 0.5"></i><p><b>8.46-8.99</b></p>' +
+                '<i style="background: ' + colors[1] + '; opacity: 0.5"></i><p><b>7.47-8.45</b></p>'+
+                '<i style="background: ' + colors[0] + '; opacity: 0.5"></i><p><b><7.46</b></p>';
 
                 // Scene 5: High School Grad Rate
 
@@ -354,12 +362,15 @@
                     function setColor4(density){
                         //Tenary operation: condition ? valueIfTrue : valueIfFalse
                         // condition ? value1 : value2
-                        return  density > 84.48 ? '#b30000' :
-                                density > 76.19 ? '#e34a33' :
-                                density > 63.51 ? '#fc8d59' :
-                                density > 18.11 ? '#fdcc8a' :
-                                '#fef0d9';
+                        var id = 0;
+                        if (density > 84.48) { id = 4; }
+                        else if (density > 76.2 && density <= 84.48) { id = 3; }
+                        else if (density > 63.52 &&  density <= 76.2) { id = 2; }
+                        else if (density > 18.12 && density <= 63.52) { id = 1; }
+                        else  { id = 0; }
+                        return colors[id];
                     }
+
 
                     // Set style function that sets fill color property equal to the housing cost burden
                     function style4(feature) {
@@ -383,11 +394,11 @@
 
 
                     var counties_gradrate_legend = '<p><b>HS Grad Rate</b></p>' +
-                        '<i style="background: #fef0d9; opacity: 0.5"></i><p><b><18.11</b></p>' +
-                        '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>18.12-63.51</b></p>' +
-                        '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>63.52-76.19</b></p>' +
-                        '<i style="background: #e34a33; opacity: 0.5"></i><p><b>76.2-84.48</b></p>'+
-                        '<i style="background: #b30000; opacity: 0.5"></i><p><b>>84.48</b></p>';
+                        '<i style="background: ' + colors[4] + '; opacity: 0.5"></i><p><b>>84.48</b></p>' +
+                        '<i style="background: ' + colors[3] + '; opacity: 0.5"></i><p><b>76.2-84.48</b></p>' +
+                        '<i style="background: ' + colors[2] + '; opacity: 0.5"></i><p><b>63.52-76.19</b></p>' +
+                        '<i style="background: ' + colors[1] + '; opacity: 0.5"></i><p><b>18.12-63.51</b></p>'+
+                        '<i style="background: ' + colors[0] + '; opacity: 0.5"></i><p><b><18.11</b></p>';
 
                 //////////////////////////////////////////////////////////////////////////
 
@@ -398,11 +409,13 @@
                     function setColor5(density){
                         //Tenary operation: condition ? valueIfTrue : valueIfFalse
                         // condition ? value1 : value2
-                        return  density > 123.31 ? '#b30000' :
-                                density > 68.6 ? '#e34a33' :
-                                density > 40.01 ? '#fc8d59' :
-                                density > 10.22 ? '#fdcc8a' :
-                                '#fef0d9';
+                        var id = 0;
+                        if (density > 123.31) { id = 4; }
+                        else if (density > 68.7 && density <= 123.31) { id = 3; }
+                        else if (density > 40.02 &&  density <= 68.7) { id = 2; }
+                        else if (density > 10.23 && density <= 40.02) { id = 1; }
+                        else  { id = 0; }
+                        return colors[id];
                     }
 
                     // Set style function that sets fill color property equal to the housing cost burden
@@ -427,11 +440,11 @@
 
 
                     var counties_highered_legend = '<p><b>Higher Ed Enrollment</b></p>' +
-                        '<i style="background: #fef0d9; opacity: 0.5"></i><p><b><10.22</b></p>' +
-                        '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>10.23-40.01</b></p>' +
-                        '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>40.02-68.6</b></p>' +
-                        '<i style="background: #e34a33; opacity: 0.5"></i><p><b>68.7-123.31</b></p>'+
-                        '<i style="background: #b30000; opacity: 0.5"></i><p><b>>123.31</b></p>';
+                        '<i style="background: ' + colors[4] + '; opacity: 0.5"></i><p><b>>123.31</b></p>' +
+                        '<i style="background: ' + colors[3] + '; opacity: 0.5"></i><p><b>68.7-123.31</b></p>' +
+                        '<i style="background: ' + colors[2] + '; opacity: 0.5"></i><p><b>40.02-68.6</b></p>' +
+                        '<i style="background: ' + colors[1] + '; opacity: 0.5"></i><p><b>10.23-40.01</b></p>'+
+                        '<i style="background: ' + colors[0] + '; opacity: 0.5"></i><p><b><10.22</b></p>';
 
                 //////////////////////////////////////////////////////////////////////////
 

@@ -40,6 +40,9 @@
     <!--leaflet.ajax for asynchronously adding geojson data-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
 
+    <!--chroma.js-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/1.3.4/chroma.min.js"></script>
+
     <!--mini globle map-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.19/topojson.min.js"></script>
@@ -206,19 +209,22 @@
 <!-- main javascript -->
 <script type="text/javascript">
 
+var colors = chroma.scale('Oranges').colors(5);
+
     //////////////////////////////////////////////////////////////////////////
     // Scene 2: Physically Active Adults
     // Set function for color ramp
     function setColor1(density){
         //Tenary operation: condition ? valueIfTrue : valueIfFalse
         // condition ? value1 : value2
-        return  density > 32.01 ? '#b30000' :
-                density > 25.91 ? '#e34a33' :
-                density > 17.61 ? '#fc8d59' :
-                density > 6.21 ? '#fdcc8a' :
-                '#fef0d9';
+        var id = 0;
+        if (density > 32.01) { id = 4; }
+        else if (density > 25.91 && density <= 32.01) { id = 3; }
+        else if (density > 17.62 &&  density <= 25.91) { id = 2; }
+        else if (density > 6.22 && density <= 17.62) { id = 1; }
+        else  { id = 0; }
+        return colors[id];
     }
-
     // Set style function that sets fill color property equal to Total Population
     function style1(feature) {
         return {
@@ -241,11 +247,11 @@
 
 
     var counties_paa_legend = '<p><b>Physically Active Adults (%)</b></p>' +
-        '<i style="background: #fef0d9; opacity: 0.5"></i><p><b><6.21</b></p>' +
-        '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>6.22-17.61</b></p>' +
-        '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>17.62-25.91</b></p>' +
-        '<i style="background: #e34a33; opacity: 0.5"></i><p><b>25.91-32.01</b></p>' +
-        '<i style="background: #b30000; opacity: 0.5"></i><p><b>>32.01</b></p>';
+        '<i style="background: ' + colors[4] + '; opacity: 0.5"></i><p><b>>32.01</b></p>' +
+        '<i style="background: ' + colors[3] + '; opacity: 0.5"></i><p><b>25.91-32.01</b></p>' +
+        '<i style="background: ' + colors[2] + '; opacity: 0.5"></i><p><b>17.62-25.91</b></p>' +
+        '<i style="background: ' + colors[1] + '; opacity: 0.5"></i><p><b>6.22-17.61</b></p>' +
+        '<i style="background: ' + colors[0] + '; opacity: 0.5"></i><p><b><6.21</b></p>';
 
 
 
@@ -256,11 +262,13 @@
         function setColor2(density){
             //Tenary operation: condition ? valueIfTrue : valueIfFalse
             // condition ? value1 : value2
-            return  density > 30.91 ? '#b30000' :
-                    density > 22.61 ? '#e34a33' :
-                    density > 14.61 ? '#fc8d59' :
-                    density > 5.91 ? '#fdcc8a' :
-                    '#fef0d9';
+            var id = 0;
+            if (density > 30.91) { id = 4; }
+            else if (density > 22.62 && density <= 30.91) { id = 3; }
+            else if (density > 14.62 &&  density <= 22.62) { id = 2; }
+            else if (density > 5.92 && density <= 14.62) { id = 1; }
+            else  { id = 0; }
+            return colors[id];
         }
 
         // Set style function that sets fill color property equal to percentage of rural population
@@ -279,17 +287,17 @@
             {
                 style: style2,
                 onEachFeature: function (feature, layer) {
-                    layer.bindTooltip(feature.properties.NAME+"<br>Adults Smoking: "+ (feature.properties.smoking).toFixed(2) + "%", {className: 'feature-label', permanent: false, direction: 'center'});
+                    layer.bindTooltip(feature.properties.NAME+"<br>Adults Smoking: "+ (feature.properties.smoking) + "%", {className: 'feature-label', permanent: false, direction: 'center'});
                 }
             });
 
 
         var counties_smoking_legend = '<p><b>% Adults Smoking</b></p>' +
-        '<i style="background: #fef0d9; opacity: 0.5"></i><p><b><5.91</b></p>' +
-        '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>5.92-14.61</b></p>' +
-        '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>14.62-22.61</b></p>' +
-        '<i style="background: #e34a33; opacity: 0.5"></i><p><b>22.62-30.91</b></p>' +
-        '<i style="background: #b30000; opacity: 0.5"></i><p><b>>30.91</b></p>';
+        '<i style="background: ' + colors[4] + '; opacity: 0.5"></i><p><b>>30.91</b></p>' +
+        '<i style="background: ' + colors[3] + '; opacity: 0.5"></i><p><b>22.62-30.91</b></p>' +
+        '<i style="background: ' + colors[2] + '; opacity: 0.5"></i><p><b>14.62-22.61</b></p>' +
+        '<i style="background: ' + colors[1] + '; opacity: 0.5"></i><p><b>5.92-14.61</b></p>' +
+        '<i style="background: ' + colors[0] + '; opacity: 0.5"></i><p><b><5.91</b></p>';
 
             //////////////////////////////////////////////////////////////////////////
             // Scene 4: Vaccination 2 year olds
@@ -298,11 +306,13 @@
             function setColor3(density){
                 //Tenary operation: condition ? valueIfTrue : valueIfFalse
                 // condition ? value1 : value2
-                return  density > 73.01 ? '#b30000' :
-                        density > 67.01 ? '#e34a33' :
-                        density > 51.01 ? '#fc8d59' :
-                        density > 0.01 ? '#fdcc8a' :
-                        '#fef0d9';
+                var id = 0;
+                if (density > 78) { id = 4; }
+                else if (density > 71 && density <= 78) { id = 3; }
+                else if (density > 65 &&  density <= 71) { id = 2; }
+                else if (density > 51 && density <= 65) { id = 1; }
+                else  { id = 0; }
+                return colors[id];
             }
 
             // Set style function that sets fill color property equal to net migration
@@ -327,11 +337,11 @@
 
 
             var counties_vaxrate_legend = '<p><b>Vax Rate (%)</b></p>' +
-                '<i style="background: #fef0d9; opacity: 0.5"></i><p><b><0.01</b></p>' +
-                '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>0.01-51</b></p>' +
-                '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>51.01-67</b></p>' +
-                '<i style="background: #e34a33; opacity: 0.5"></i><p><b>67.01-73</b></p>'+
-                '<i style="background: #b30000; opacity: 0.5"></i><p><b>>73</b></p>';
+                '<i style="background: ' + colors[4] + '; opacity: 0.5"></i><p><b>>78</b></p>' +
+                '<i style="background: ' + colors[3] + '; opacity: 0.5"></i><p><b>72-78</b></p>' +
+                '<i style="background: ' + colors[2] + '; opacity: 0.5"></i><p><b>66-71</b></p>' +
+                '<i style="background: ' + colors[1] + '; opacity: 0.5"></i><p><b>51-65</b></p>'+
+                '<i style="background: ' + colors[0] + '; opacity: 0.5"></i><p><b><51</b></p>';
 
                 // Scene 5: Low Birth weight
 
@@ -340,11 +350,13 @@
                     function setColor4(density){
                         //Tenary operation: condition ? valueIfTrue : valueIfFalse
                         // condition ? value1 : value2
-                        return  density > 11.77 ? '#b30000' :
-                                density > 7.54 ? '#e34a33' :
-                                density > 5.99 ? '#fc8d59' :
-                                density > 2.16 ? '#fdcc8a' :
-                                '#fef0d9';
+                        var id = 0;
+                        if (density > 11.8) { id = 4; }
+                        else if (density > 7.2 && density <= 11.8) { id = 3; }
+                        else if (density > 5.9 &&  density <= 7.2) { id = 2; }
+                        else if (density > 2.2 && density <= 5.9) { id = 1; }
+                        else  { id = 0; }
+                        return colors[id];
                     }
 
                     // Set style function that sets fill color property equal to the housing cost burden
@@ -369,11 +381,11 @@
 
 
                     var counties_lowbirthra_legend = '<p><b>Low Birth Weight (%)</b></p>' +
-                        '<i style="background: #fef0d9; opacity: 0.5"></i><p><b>23.02 - 26.77</b></p>' +
-                        '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>26.78 - 31.16</b></p>' +
-                        '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>31.17 - 34.55</b></p>' +
-                        '<i style="background: #e34a33; opacity: 0.5"></i><p><b>34.56 - 38.11</b></p>'+
-                        '<i style="background: #b30000; opacity: 0.5"></i><p><b>>38.12</b></p>';
+                        '<i style="background: ' + colors[4] + '; opacity: 0.5"></i><p><b>>11.8</b></p>' +
+                        '<i style="background: ' + colors[3] + '; opacity: 0.5"></i><p><b>8.2-11.7</b></p>' +
+                        '<i style="background: ' + colors[2] + '; opacity: 0.5"></i><p><b>6-7.2</b></p>' +
+                        '<i style="background: ' + colors[1] + '; opacity: 0.5"></i><p><b>2.3-5.9</b></p>'+
+                        '<i style="background: ' + colors[0] + '; opacity: 0.5"></i><p><b>>2.2</b></p>';
 
                 //////////////////////////////////////////////////////////////////////////
 
@@ -381,20 +393,23 @@
 
 
                     // Set function for color ramp
-                    function setColor4(density){
+                    function setColor5(density){
                         //Tenary operation: condition ? valueIfTrue : valueIfFalse
                         // condition ? value1 : value2
-                        return  density > 30.9 ? '#b30000' :
-                                density > 21.8 ? '#e34a33' :
-                                density > 14.6 ? '#fc8d59' :
-                                density > 5.9 ? '#fdcc8a' :
-                                '#fef0d9';
+                        var id = 0;
+                        if (density > 30.9) { id = 4; }
+                        else if (density > 21.9 && density <= 30.9) { id = 3; }
+                        else if (density > 14.7 &&  density <= 21.9) { id = 2; }
+                        else if (density > 6 && density <= 14.7) { id = 1; }
+                        else  { id = 0; }
+                        return colors[id];
                     }
 
+
                     // Set style function that sets fill color property equal to the housing cost burden
-                    function style4(feature) {
+                    function style5(feature) {
                         return {
-                            fillColor: setColor4(feature.properties.heathydiet),
+                            fillColor: setColor5(feature.properties.heathydiet),
                             fillOpacity: 0.5,
                             weight: 2,
                             opacity: 0.8,
@@ -405,19 +420,19 @@
 
                     var counties_healthydiet = L.geoJson.ajax('assets/counties.geojson',
                         {
-                            style: style4,
+                            style: style5,
                             onEachFeature: function (feature, layer) {
-                                layer.bindTooltip(feature.properties.NAME+"<br>Healthy Diet: "+ (feature.properties.heathydiet).toFixed(2)+ "%", {className: 'feature-label', permanent: false, direction: 'center'});
+                                layer.bindTooltip(feature.properties.NAME+"<br>Healthy Diet: "+ (feature.properties.heathydiet)+ "%", {className: 'feature-label', permanent: false, direction: 'center'});
                             }
                         });
 
 
                     var counties_healthydiet_legend = '<p><b>% Healthy Diet</b></p>' +
-                        '<i style="background: #fef0d9; opacity: 0.5"></i><p><b><5.9</b></p>' +
-                        '<i style="background: #fdcc8a; opacity: 0.5"></i><p><b>6-14.6</b></p>' +
-                        '<i style="background: #fc8d59; opacity: 0.5"></i><p><b>14.7-21.8</b></p>' +
-                        '<i style="background: #e34a33; opacity: 0.5"></i><p><b>21.9-30.9</b></p>'+
-                        '<i style="background: #b30000; opacity: 0.5"></i><p><b>>30.9</b></p>';
+                        '<i style="background: ' + colors[4] + '; opacity: 0.5"></i><p><b>>30.9</b></p>' +
+                        '<i style="background: ' + colors[3] + '; opacity: 0.5"></i><p><b>21.9-30.9</b></p>' +
+                        '<i style="background: ' + colors[2] + '; opacity: 0.5"></i><p><b>14.7-21.8</b></p>' +
+                        '<i style="background: ' + colors[1] + '; opacity: 0.5"></i><p><b>6-14.6</b></p>'+
+                        '<i style="background: ' + colors[0] + '; opacity: 0.5"></i><p><b><5.9</b></p>';
 
                 //////////////////////////////////////////////////////////////////////////
 
