@@ -24,7 +24,7 @@ This Oregon by the Counties story map further extends the vision by creating an 
 ![https://benjiantolin.github.io/oregon_keymeasures_dashboard/index.html](img/indexpage.png)
 
 - Each topic hosts a sample of key measures delivered via story map presentation through the use of a series of choropleths to spatially visualize the given measure.
-![https://benjiantolin.github.io/oregon_keymeasures_dashboard/demographic.html](img/demo.png)
+![https://benjiantolin.github.io/oregon_keymeasures_dashboard/index.html](img/demo.png)
 
 
 ### Libraries
