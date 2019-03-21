@@ -29,12 +29,11 @@ This Oregon by the Counties story map further extends the vision by creating an 
 
 ### Libraries
 - leaflet.js
+- leaflet.ajax.js
 - jquery.js
   - popper.js
 - bootstrap.js
-- leaflet.ajax.js
-- d3.js
-- topojson.js
+- chroma.js
 - globalminimap.js
 - storymap.2.5.js
 
