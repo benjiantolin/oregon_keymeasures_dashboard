@@ -19,7 +19,7 @@ This dashboard includes just a handful of the key measures provided by Oregon by
 
 This Oregon by the Counties story map further extends the vision by creating an online interactive platform to visualize and analyze the key measures for Oregon counties.
 
-##### Preview
+#### Preview
 - The structure of the dashboard comprises of 6 html pages each devoted to a key measure topic as outlined above. The index page acts as the home page for the dashboard and is used to navigate from topic to topic
 ![https://benjiantolin.github.io/oregon_keymeasures_dashboard/index.html](img/indexpage.png)
 
