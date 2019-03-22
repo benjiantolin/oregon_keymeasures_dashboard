@@ -5,8 +5,7 @@
     <title>Oregon by the Counties</title>
     <!--add required stylesheet-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Cairo" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cairo|Amatic+SC:400,700" rel="stylesheet">
     <style>
 
         body {
@@ -78,6 +77,16 @@
             transform: translate(-50%, -50%);
             -ms-transform: translate(-50%, -50%);
         }
+
+        .icon {
+            color: orange;
+            font-size: 8rem;
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+        }
     </style>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
     <!--add favicon for the web page-->
@@ -116,11 +125,8 @@
         <!-- demographic icon and link -->
         <div class="col-md-4 col-lg-4 map">
             <div class="overlay">
-              <span style="font-size: 8rem;">
-                <span style="color: Mediumslateblue;">
-              <a href="demographic.html"><i class="fas fa-users"></i></a>
-            </span>
-          </span>
+              <div class="icon"><a href="demographic.html"><i class="fas fa-users"></i></a>
+              </div>
                 <div class="text"><h4><a href="demographic.html">Demographic</a></h4>
                 </div>
             </div>
@@ -128,11 +134,8 @@
         <!-- social icon and link -->
         <div class="col-md-4 col-lg-4 map">
             <div class="overlay">
-              <span style="font-size: 8rem;">
-                <span style="color: Mediumslateblue;">
-                  <a href="social.html"><i class="fas fa-shopping-basket"></i></a>
-                </span>
-              </span>
+                  <div class="icon"><a href="social.html"><i class="fas fa-shopping-basket"></i></a>
+                  </div>
                 <div class="text"><h4><a href="social.html">Social</a></h4>
                 </div>
             </div>
@@ -157,11 +160,8 @@
       <!-- education icon and link -->
         <div class="col-md-4 col-lg-4 map">
             <div class="overlay">
-              <span style="font-size: 8rem;">
-                <span style="color: Mediumslateblue;">
-                  <a href="education.html"><i class="fas fa-user-graduate"></i></a>
-                </span>
-              </span>
+                  <div class="icon"><a href="education.html"><i class="fas fa-user-graduate"></i></a>
+                  </div>
                 <div class="text"><h4><a href="education.html">Education</a></h4>
                 </div>
             </div>
@@ -170,11 +170,8 @@
         <!-- health icon and link -->
         <div class="col-md-4 col-lg-4 map">
             <div class="overlay">
-              <span style="font-size: 8rem;">
-                <span style="color: Mediumslateblue;">
-                  <a href="health.html"><i class="fas fa-medkit"></i></a>
-                </span>
-              </span>
+                  <div class="icon"><a href="health.html"><i class="fas fa-medkit"></i></a>
+                  </div>
                 <div class="text"><h4><a href="health.html">Health</a></h4>
                 </div>
             </div>
