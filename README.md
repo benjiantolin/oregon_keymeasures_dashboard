@@ -29,9 +29,8 @@ This Oregon by the Counties story map further extends the vision by creating an 
 
 ### Libraries
 - leaflet.js
-- leaflet.ajax.js
 - jquery.js
-  - popper.js
+- popper.js
 - bootstrap.js
 - chroma.js
 - globalminimap.js
